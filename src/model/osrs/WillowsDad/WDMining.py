@@ -101,7 +101,7 @@ class OSRSWDMining(WillowsDadBot):
                         time.sleep(self.random_sleep_length())
                     if Mining_spot := self.get_nearest_tag(clr.PINK):
                         self.go_mining()
-                        deposit_slots = self.api_m.get_inv_item_indice(self.deposit_ids)
+                        deposit_slots = self.api_m.get_inv_item_indices(self.deposit_ids)
                     else:
                         self.walk_to_color(clr.PINK, -1)
 
