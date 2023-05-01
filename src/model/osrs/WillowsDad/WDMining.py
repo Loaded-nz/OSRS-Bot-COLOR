@@ -257,7 +257,7 @@ class OSRSWDMining(WillowsDadBot):
             self.open_bank()
             time.sleep(self.random_sleep_length())
             self.check_deposit_all()
-            self.deposit_items(slot_list == 0)
+            self.deposit_items(deposit_slots, self.deposit_ids)
             time.sleep(self.random_sleep_length())
             self.close_bank()
             time.sleep(self.random_sleep_length())
