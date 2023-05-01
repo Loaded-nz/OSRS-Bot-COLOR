@@ -109,7 +109,7 @@ class MorgHTTPSocket:
                 An int representing the current animation ID.
         """
         data = self.__do_get(endpoint=self.events_endpoint)
-        return int(data["animation pose"]) if data.get("animation pose") else -1
+        return int(data["animation"]) if data.get("animation pose") else -1
 
     def get_is_player_idle(self, poll_seconds=1) -> bool:
         """
@@ -318,7 +318,7 @@ class MorgHTTPSocket:
         """
         data = self.__do_get(endpoint=self.inv_endpoint)
         return len([item["id"] for item in data if item["id"] != -1]) == 28
-
+    
     def get_is_inv_empty(self) -> bool:
         """
         Checks if player's inventory is empty.
@@ -366,7 +366,11 @@ class MorgHTTPSocket:
                 if item_id_in_slot not in first_occurrences and item_id_in_slot in item_id:
                     first_occurrences[item_id_in_slot] = i
 
-            return list(first_occurrences.values())
+            if list(first_occurrences.values()): 
+                return list(first_occurrences.values())
+            else: return -1
+
+    def get_inv_item_stack_amount(self, item_id: Union[int, List[int]]) -> int:
         """
         For the given item ID, returns the total amount of that item in your inventory.
         This is only useful for items that stack (e.g. coins, runes, etc).
@@ -452,7 +456,6 @@ if __name__ == "__main__":
         # Inventory Data
         if False:
             print(f"Is inventory full: {api.get_is_inv_full()}")
-            print(f"Is inventory empty: {api.get_is_inv_empty()}")
             print(f"Are logs in inventory?: {api.get_if_item_in_inv(ids.logs)}")
             print(f"Find amount of change in inv: {api.get_inv_item_stack_amount(ids.coins)}")
             print(f"Get position of all bones in inv: {api.get_inv_item_indices(ids.BONES)}")
