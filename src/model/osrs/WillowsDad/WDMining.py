@@ -95,7 +95,7 @@ class OSRSWDMining(WillowsDadBot):
 
             try:
                 while not self.api_m.get_is_inv_full():
-                    if self.api_m.get_run_energy() == 10000:
+                    if self.api_m.get_run_energy() == 5000:
                         self.mouse.move_to(self.win.run_orb.random_point())
                         self.mouse.click()
                         time.sleep(self.random_sleep_length())
