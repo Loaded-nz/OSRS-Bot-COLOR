@@ -88,13 +88,13 @@ class OSRSWDWoodcutting(WillowsDadBot):
             minutes_since_last_break = int((time.time() - self.last_break) / 60)
             seconds = int(time.time() - self.last_break) % 60
             percentage = (self.multiplier * .01)  # this is the percentage chance of a break
-            deposit_slots = self.api_m.get_inv_item_indices(self.deposit_ids)
+            self.deposit_items()
             self.roll_chance_passed = False
             self.spec_energy = self.get_special_energy()
             try:
                 # check if inventory is full
                 if self.api_m.get_is_inv_full():
-                    self.bank_or_drop(deposit_slots)
+                    self.deposit_items()
 
                 # Check if idle
                 if self.api_m.get_is_player_idle():
@@ -249,7 +249,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.stop()
 
 
-    def bank_or_drop(self, deposit_slots):
+    def deposit_items(self):
         """
         This will either bank or drop items depending on the power_chopping setting.
         Returns: void
@@ -261,12 +261,8 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.log_msg("Inventory is full but runelight is not in focus, lets wait...")
                     time.sleep(self.random_sleep_length(.8, 1.2))
                     break
-            self.open_bank()
-            time.sleep(self.random_sleep_length())
-            self.check_deposit_all()
-            self.deposit_items(deposit_slots, self.deposit_ids)
-            time.sleep(self.random_sleep_length())
-            self.close_bank()
+            Slot_to_click = self.win.inventory_slots[int(rd.fancy_normal_sample(2,27))]
+        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("WillowsDad_images", "bank_all.png")
         else:
             self.drop_all()
 
