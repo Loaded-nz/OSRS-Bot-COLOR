@@ -261,10 +261,13 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.log_msg("Inventory is full but runelight is not in focus, lets wait...")
                     time.sleep(self.random_sleep_length(.8, 1.2))
                     break
-            Slot_to_click = self.win.inventory_slots[int(rd.fancy_normal_sample(2,27))]
-        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("WillowsDad_images", "bank_all.png")
-        else:
-            self.drop_all()
+            self.open_bank()
+            time.sleep(self.random_sleep_length())
+            self.check_deposit_all()
+            self.mouse.move_to(imsearch.BOT_IMAGES.joinpath("WillowsDad_images", "bank_all.png"))
+            self.mouse.click()
+            time.sleep(self.random_sleep_length())
+            self.close_bank()
 
 
     def check_axe(self):
