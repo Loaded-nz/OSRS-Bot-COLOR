@@ -262,9 +262,9 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     time.sleep(self.random_sleep_length(.8, 1.2))
                     break
             Slot_to_click = self.win.inventory_slots[int(rd.fancy_normal_sample(2,27))]
-        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("WillowsDad_images", "bank_all.png")
+            Desposit_all_img = imsearch.BOT_IMAGES.joinpath("WillowsDad_images", "bank_all.png")
         else:
-            self.drop_all()
+         self.drop_all()
 
 
     def check_axe(self):
