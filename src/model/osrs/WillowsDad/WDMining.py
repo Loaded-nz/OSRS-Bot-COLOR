@@ -257,7 +257,7 @@ class OSRSWDMining(WillowsDadBot):
             self.open_bank()
             time.sleep(self.random_sleep_length())
             self.check_deposit_all()
-            imsearch.search_img_in_rect(imsearch.BOT_IMAGES.joinpath("bank_all.png"), self.win.game_view):
+            imsearch.search_img_in_rect(imsearch.BOT_IMAGES.joinpath("bank_all.png"), self.win.game_view)
             time.sleep(0.5)
             self.close_bank()
             time.sleep(self.random_sleep_length())
