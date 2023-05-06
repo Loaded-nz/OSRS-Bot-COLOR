@@ -226,7 +226,7 @@ class OSRSWDMining(WillowsDadBot):
                 while not self.mouse.click(check_red_click=True):
                     if Mining_spot := self.get_nearest_tag(clr.PINK):
                         self.mouse.move_to(Mining_spot.random_point())
-                self.api_m.wait_til_gained_xp("Mining", timeout=0.10)
+                self.api_m.wait_til_gained_xp("Mining", timeout=0.5)
 
             else:
                 if int(time.time() - self.idle_time) > 10:
@@ -257,8 +257,8 @@ class OSRSWDMining(WillowsDadBot):
             self.open_bank()
             time.sleep(self.random_sleep_length())
             self.check_deposit_all()
-            imsearch.search_img_in_rect(imsearch.BOT_IMAGES.joinpath("bank_all.png"), self.win.game_view)
-            time.sleep(0.5)
+            self.deposit_items(deposit_slots)
+            time.sleep(self.random_sleep_length())
             self.close_bank()
             time.sleep(self.random_sleep_length())
         else:
