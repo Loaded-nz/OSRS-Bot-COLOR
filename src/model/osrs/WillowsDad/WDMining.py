@@ -23,8 +23,8 @@ class OSRSWDMining(WillowsDadBot):
         self.running_time = 200
         self.take_breaks = True
         self.afk_train = True
-        self.delay_min =0.37
-        self.delay_max = .67
+        self.delay_min =0.10
+        self.delay_max =0.67
         self.ores = ids.ores
         self.power_Mining = False
         self.Mining_tools = ids.pickaxes
@@ -226,7 +226,7 @@ class OSRSWDMining(WillowsDadBot):
                 while not self.mouse.click(check_red_click=True):
                     if Mining_spot := self.get_nearest_tag(clr.PINK):
                         self.mouse.move_to(Mining_spot.random_point())
-                self.api_m.wait_til_gained_xp("Mining", timeout=4)
+                self.api_m.wait_til_gained_xp("Mining", timeout=1)
 
             else:
                 if int(time.time() - self.idle_time) > 10:
