@@ -264,7 +264,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
             self.open_bank()
             time.sleep(self.random_sleep_length())
             self.check_deposit_all()
-            self.mouse.move_to(imsearch.BOT_IMAGES.joinpath("WillowsDad_images", "bank_all.png"))
+            self.mouse.move_to(imsearch.BOT_IMAGES.joinpath("images", "deposit_all.png"))
             self.mouse.click()
             time.sleep(self.random_sleep_length())
             self.close_bank()
