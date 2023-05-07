@@ -255,13 +255,11 @@ class OSRSWDMining(WillowsDadBot):
         Args: None"""
         if not self.power_Mining:
             self.open_bank()
-            time.sleep(self.random_sleep_length())
+            time.sleep(self.random_sleep_length()/2)
             self.check_deposit_all()
-            self.mouse.move_to.imsearch.search_img_in_rect(self.WILLOWSDAD_IMAGES.joinpath("bank_all.png"))
-            self.mouse.click()
-            time.sleep(self.random_sleep_length())
+            self.deposit_items(deposit_slots, self.deposit_ids)
+            time.sleep(self.random_sleep_length()/2)
             self.close_bank()
-            time.sleep(self.random_sleep_length())
         else:
             self.drop_all(skip_slots=self.api_m.get_inv_slots_with_items(self.Mining_tools))
 
