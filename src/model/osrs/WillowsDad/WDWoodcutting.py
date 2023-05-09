@@ -263,7 +263,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     break
             self.open_bank()
             time.sleep(self.random_sleep_length())
-            self.is_bank_open(self)
+            self.is_bank_open
             self.deposit_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
             self.mouse.click()
             time.sleep(self.random_sleep_length())
