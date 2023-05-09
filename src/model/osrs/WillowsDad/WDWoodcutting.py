@@ -264,7 +264,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     break
             self.open_bank()
             time.sleep(self.random_sleep_length())
-            self.deposit_inventory(bank_all)
+            self.deposit_items(bank_all)
             time.sleep(self.random_sleep_length())
             self.close_bank()
         else:
