@@ -248,7 +248,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.stop()
 
 
-    def deposit_items(self, bank_all):
+    def deposit_items(bank_all):
         """
         This will either bank or drop items depending on the power_chopping setting.
         Returns: void
