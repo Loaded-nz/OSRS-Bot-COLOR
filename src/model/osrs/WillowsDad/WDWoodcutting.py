@@ -94,7 +94,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
             try:
                 # check if inventory is full
                 if self.api_m.get_is_inv_full():
-                    self.bank_or_drop(deposit_slots)
+                    self.is_bank_open(self)
 
                 # Check if idle
                 if self.api_m.get_is_player_idle():
