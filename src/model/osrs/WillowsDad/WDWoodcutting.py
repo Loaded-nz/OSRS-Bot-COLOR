@@ -94,7 +94,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
             try:
                 # check if inventory is full
                 if self.api_m.get_is_inv_full():
-                    self.is_bank_open(self)
+                    self.bank_or_drop(deposit_slots)
 
                 # Check if idle
                 if self.api_m.get_is_player_idle():
@@ -263,9 +263,8 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     break
             self.open_bank()
             time.sleep(self.random_sleep_length())
-            # Define the image to search for in the bank interface
-            deposit_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
-            imsearch.search_img_in_rect(deposit_all_img, self.win.game_view)
+            self.check_deposit_all()
+            self.deposit_items(deposit_slots, self.deposit_ids)
             time.sleep(self.random_sleep_length())
             self.close_bank()
         else:
