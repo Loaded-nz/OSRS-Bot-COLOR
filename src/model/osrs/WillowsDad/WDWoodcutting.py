@@ -249,12 +249,11 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.stop()
 
 
-    def bank_or_drop(self, deposit_slots):
+    def bank_or_drop(self, deposit_inventory):
         """
         This will either bank or drop items depending on the power_chopping setting.
         Returns: void
         Args: None"""
-        deposit_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
         if not self.power_chopping:
             end_time = time.time() + 5
             while time.time() < end_time:
@@ -264,7 +263,6 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     break
             self.open_bank()
             time.sleep(self.random_sleep_length())
-            self.check_deposit_all()
             self.deposit_inventory()
             time.sleep(self.random_sleep_length())
             self.close_bank()
