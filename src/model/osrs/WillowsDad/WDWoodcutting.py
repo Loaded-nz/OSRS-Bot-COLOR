@@ -94,7 +94,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
             try:
                 # check if inventory is full
                 if self.api_m.get_is_inv_full():
-                    self.bank_or_drop(deposit_slots)
+                    self.deposit_inventory
 
                 # Check if idle
                 if self.api_m.get_is_player_idle():
@@ -249,7 +249,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.stop()
 
 
-    def bank_or_drop(self, deposit_inventory):
+    def deposit_inventory(self):
         """
         This will either bank or drop items depending on the power_chopping setting.
         Returns: void
