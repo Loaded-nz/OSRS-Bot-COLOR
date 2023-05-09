@@ -88,13 +88,13 @@ class OSRSWDWoodcutting(WillowsDadBot):
             minutes_since_last_break = int((time.time() - self.last_break) / 60)
             seconds = int(time.time() - self.last_break) % 60
             percentage = (self.multiplier * .01)  # this is the percentage chance of a break
-            self.deposit_items()
+            deposit_slots = self.api_m.get_inv_item_first_indice(self.deposit_ids)
             self.roll_chance_passed = False
             self.spec_energy = self.get_special_energy()
             try:
                 # check if inventory is full
                 if self.api_m.get_is_inv_full():
-                    self.deposit_items()
+                    self.bank_or_drop(deposit_slots)
 
                 # Check if idle
                 if self.api_m.get_is_player_idle():
@@ -249,7 +249,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.stop()
 
 
-    def deposit_items(self):
+    def bank_or_drop(self, deposit_slots):
         """
         This will either bank or drop items depending on the power_chopping setting.
         Returns: void
@@ -264,10 +264,11 @@ class OSRSWDWoodcutting(WillowsDadBot):
             self.open_bank()
             time.sleep(self.random_sleep_length())
             self.check_deposit_all()
-            self.mouse.move_to(imsearch.BOT_IMAGES.joinpath("images", "deposit_all.png"))
-            self.mouse.click()
+            self.deposit_items(deposit_slots, self.deposit_ids)
             time.sleep(self.random_sleep_length())
             self.close_bank()
+        else:
+            self.drop_all()
 
 
     def check_axe(self):
