@@ -88,7 +88,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
             minutes_since_last_break = int((time.time() - self.last_break) / 60)
             seconds = int(time.time() - self.last_break) % 60
             percentage = (self.multiplier * .01)  # this is the percentage chance of a break
-            deposit_slots = self.api_m.get_inv_item_first_indice(self.deposit_ids)
+            deposit = imsearch.search_img_in_rect(imsearch.BOT_IMAGES.joinpath("bank_all.png"), self.win.game_view)
             self.roll_chance_passed = False
             self.spec_energy = self.get_special_energy()
             try:
@@ -249,7 +249,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.stop()
 
 
-    def deposit_inventory(self):
+    def deposit_inventory(self, deposit):
         """
         This will either bank or drop items depending on the power_chopping setting.
         Returns: void
