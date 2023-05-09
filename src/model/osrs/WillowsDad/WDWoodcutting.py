@@ -95,7 +95,6 @@ class OSRSWDWoodcutting(WillowsDadBot):
                 # check if inventory is full
                 if self.api_m.get_is_inv_full():
                     self.bank_or_drop(deposit_slots)
-                    
 
                 # Check if idle
                 if self.api_m.get_is_player_idle():
@@ -255,6 +254,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
         This will either bank or drop items depending on the power_chopping setting.
         Returns: void
         Args: None"""
+        deposit_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
         if not self.power_chopping:
             end_time = time.time() + 5
             while time.time() < end_time:
@@ -265,8 +265,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
             self.open_bank()
             time.sleep(self.random_sleep_length())
             self.check_deposit_all()
-            deposit_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
-            self.deposit_items(deposit_all_img, deposit_slots, self.deposit_ids)
+            self.check_bank_all
             time.sleep(self.random_sleep_length())
             self.close_bank()
         else:
