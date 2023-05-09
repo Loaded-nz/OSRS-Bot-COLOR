@@ -249,29 +249,27 @@ class OSRSWDWoodcutting(WillowsDadBot):
                     self.stop()
 
 
-    def is_bank_open(self):
-        """Checks if the bank is open, if not, opens it
-        Returns:
-            True if the bank is open, False if not
-        Args:
-            None"""
-        # Define the image to search for in the bank interface
-        deposit_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
-
-        # Set a time limit for searching for the image
-        end_time = time.time() + 2
-
-        # Loop until the time limit is reached
-        while (time.time() < end_time):
-            # Check if the image is found in the game view
-            if deposit_btn := imsearch.search_img_in_rect(deposit_all_img, self.win.game_view):
-                return True
-
-            # Sleep for a short time to avoid excessive CPU usage
-            time.sleep(.2)
-
-        # If the image was not found within the time limit, return False
-        return False
+    def bank_or_drop(self, deposit_slots):
+        """
+        This will either bank or drop items depending on the power_chopping setting.
+        Returns: void
+        Args: None"""
+        if not self.power_chopping:
+            end_time = time.time() + 5
+            while time.time() < end_time:
+                if not self.is_runelite_focused():   
+                    self.log_msg("Inventory is full but runelight is not in focus, lets wait...")
+                    time.sleep(self.random_sleep_length(.8, 1.2))
+                    break
+            self.open_bank()
+            time.sleep(self.random_sleep_length())
+            self.is_bank_open(self)
+            self.deposit_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
+            self.mouse.click()
+            time.sleep(self.random_sleep_length())
+            self.close_bank()
+        else:
+            self.drop_all()
 
 
     def check_axe(self):
