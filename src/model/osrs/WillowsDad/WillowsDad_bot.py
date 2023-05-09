@@ -591,7 +591,7 @@ class WillowsDadBot(OSRSBot, launcher.Launchable, metaclass=ABCMeta):
         Args:
             None"""
         # Define the image to search for in the bank interface
-        deposit_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
+        bank_all_img = self.WILLOWSDAD_IMAGES.joinpath("bank_all.png")
 
         # Set a time limit for searching for the image
         end_time = time.time() + 2
@@ -599,7 +599,7 @@ class WillowsDadBot(OSRSBot, launcher.Launchable, metaclass=ABCMeta):
         # Loop until the time limit is reached
         while (time.time() < end_time):
             # Check if the image is found in the game view
-            if deposit_btn := imsearch.search_img_in_rect(deposit_all_img, self.win.game_view):
+            if bank_all_btn := imsearch.search_img_in_rect(bank_all_img, self.win.game_view):
                 return True
 
             # Sleep for a short time to avoid excessive CPU usage
