@@ -80,7 +80,7 @@ class OSRSHunter(OSRSBot, launcher.Launchable):
         
         box_traps = self.get_all_tagged_in_rect(self.win.game_view, clr.CYAN)                                   
         probability = 0.10
-        if len(box_traps) == 3:
+        if len(box_traps) == 4:
             while True:
                 self.log_msg("waiting for chins")
                 if rd.random_chance(probability):
