@@ -4,4 +4,3 @@ from .osrs import *
 from .runelite_bot import *
 from .zaros import *
 from .bvfc import OSRSBVFC
-from .Bow_Fletcher.BowFletcher import OSRSBowFletcher
