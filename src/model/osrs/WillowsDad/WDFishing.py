@@ -287,7 +287,7 @@ class OSRSWDFishing(WillowsDadBot):
             self.close_bank()
             time.sleep(self.random_sleep_length())
         else:
-            self.drop_all(skip_slots=[0])
+            self.drop_all(skip_slots=[0, 1])
 
     def check_equipment(self):
         """
