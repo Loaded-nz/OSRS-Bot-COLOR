@@ -53,7 +53,7 @@ class OSRSWDFishing(WillowsDadBot):
             if option == "style":
                 if options[option] == "Fly":
                     self.style = "Fly"
-                    self.fishing_tools = [ids.FLY_FISHING_ROD]
+                    self.fishing_tools = [ids.FLY_FISHING_ROD, ids.BARBARIAN_ROD]
                     self.fishing_bait = [ids.FEATHER]
                 elif options[option] == "Bait":
                     self.style = "Bait"
