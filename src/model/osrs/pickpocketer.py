@@ -68,7 +68,7 @@ class OSRSPickpocket(OSRSBot, launcher.Launchable):
 
     def check_hitpoints(self):
         current_hp = self.api_m.get_hitpoints()
-        if current_hp[0] < 15:
+        if current_hp[0] < 50:
             self.log_msg("Health low")
 
             food_id = self.get_food_id()
