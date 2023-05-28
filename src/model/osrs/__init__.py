@@ -6,4 +6,3 @@ from .WillowsDad.WDFishing import OSRSWDFishing
 from .WillowsDad.WillowsDad_bot import WillowsDadBot
 from .WillowsDad.WDMining import OSRSWDMining
 from .hunterbotscript import OSRSHunter
-from .pickpocketer import OSRSPickpocket
