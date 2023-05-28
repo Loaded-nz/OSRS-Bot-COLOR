@@ -1,6 +1,5 @@
 import time
 import utilities.api.item_ids as ids
-from utilities.api.morg_http_client import MorgHTTPSocket
 import utilities.color as clr
 from utilities.geometry import RuneLiteObject
 import utilities.random_util as rd
