@@ -7,7 +7,6 @@ import utilities.random_util as rd
 import pyautogui as pag
 import utilities.game_launcher as launcher
 import utilities.imagesearch as imsearch
-from utilities.api.status_socket import StatusSocket
 from model.osrs.osrs_bot import OSRSBot
 
 
