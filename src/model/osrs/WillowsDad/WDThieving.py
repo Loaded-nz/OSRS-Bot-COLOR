@@ -1,8 +1,10 @@
 import time
-
+import utilities.imagesearch as imsearch
 import utilities.api.item_ids as ids
 import utilities.color as clr
 import utilities.random_util as rd
+import pyautogui as pag
+from utilities.geometry import RuneLiteObject
 from model.osrs.osrs_bot import OSRSBot
 from utilities.api.morg_http_client import MorgHTTPSocket
 from utilities.api.status_socket import StatusSocket
@@ -11,158 +13,170 @@ from model.osrs.WillowsDad.WillowsDad_bot import WillowsDadBot
 
 class OSRSWDThieving(WillowsDadBot):
     def __init__(self):
-        bot_title = "WillowsDad Thieving"
-        description = "This bot will left-click pickpocket(men) or steal from ardougne cake stall. Just meant to run for a couple minutes for requirements. No support. Coin pouches expected in 1st slot."
+        bot_title = "Ardy Knight Pickpocket"
+        description = "This bot pickpockets from the ardy knight"
         super().__init__(bot_title=bot_title, description=description)
-        # Set option variables below (initial value is only used during UI-less testing)
-        self.running_time = 20
-        self.running_time = 200
-        self.take_breaks = True
-        self.afk_train = True
-        self.delay_min =0.37
-        self.delay_max = .67
+        self.running_time = 1
+        self.take_breaks = False
+        self.api_m = MorgHTTPSocket() 
+        self.starting_exp = self.api_m.get_skill_xp('Thieving')
+        self.food_list = ['Trout', 'Salmon']
+
 
     def create_options(self):
-        """
-        Use the OptionsBuilder to define the options for the bot. For each function call below,
-        we define the type of option we want to create, its key, a label for the option that the user will
-        see, and the possible values the user can select. The key is used in the save_options function to
-        unpack the dictionary of options after the user has selected them.
-        """
-        super().create_options()
-        self.options_builder.add_dropdown_option("thieving_method", "Thieving Method?", ["Pickpocketing","Stalls"])
+        self.options_builder.add_slider_option("running_time", "How long to run (minutes)?", 1, 120)
+        self.options_builder.add_dropdown_option("food_to_use", "Select food", self.food_list)
+        self.options_builder.add_checkbox_option("take_breaks", "Take breaks?", [" "])
 
+        
     def save_options(self, options: dict):
-        """
-        For each option in the dictionary, if it is an expected option, save the value as a property of the bot.
-        If any unexpected options are found, log a warning. If an option is missing, set the options_set flag to
-        False.
-        """
-        super().save_options(options)
         for option in options:
-            if option == "thieving_method":
-                self.thieving_method = options[option]
+            if option == "running_time":
+                self.running_time = options[option]  
+            elif option == "take_breaks":
+                self.take_breaks = options[option] != []     
+            elif option == "food_to_use":
+                self.food_to_use = options[option]     
             else:
                 self.log_msg(f"Unknown option: {option}")
+                print("Developer: ensure that the option keys are correct, and that options are being unpacked correctly.")
+                self.options_set = False
+                return
         self.log_msg(f"Running time: {self.running_time} minutes.")
         self.log_msg("Options set successfully.")
-        self.log_msg(f"Running time: {self.running_time} minutes.")
-        self.log_msg(f"Bot will{'' if self.take_breaks else ' not'} take breaks.")
-        self.log_msg(f"Bot will{'' if self.afk_train else ' not'} train like you're afk on another tab.")
-        self.log_msg(f"Bot will wait between {self.delay_min} and {self.delay_max} seconds between actions.")
         self.options_set = True
 
-    def main_loop(self):
-        """
-        When implementing this function, you have the following responsibilities:
-        1. If you need to halt the bot from within this function, call `self.stop()`. You'll want to do this
-           when the bot has made a mistake, gets stuck, or a condition is met that requires the bot to stop.
-        2. Frequently call self.update_progress() and self.log_msg() to send information to the UI.
-        3. At the end of the main loop, make sure to call `self.stop()`.
 
-        Additional notes:
-        - Make use of Bot/RuneLiteBot member functions. There are many functions to simplify various actions.
-          Visit the Wiki for more.
-        - Using the available APIs is highly recommended. Some of all of the API tools may be unavailable for
-          select private servers. To see what the APIs can offer you, see here: https://github.com/kelltom/OSRS-Bot-COLOR/tree/main/src/utilities/api.
-          For usage, uncomment the `api_m` and/or `api_s` lines below, and use the `.` operator to access their
-          functions.
-        """
-        # Setup APIs
-        # api_m = MorgHTTPSocket()
-        # api_s = StatusSocket()
-        self.setup()
-        # Main loop
+    def main_loop(self):      
         start_time = time.time()
         end_time = self.running_time * 60
-        while time.time() - start_time < end_time:
-            # -- Perform bot actions here --
-            # Code within this block will LOOP until the bot is stopped.
-            runtime = int(time.time() - self.start_time)
-            minutes_since_last_break = int((time.time() - self.last_break) / 60)
-            seconds = int(time.time() - self.last_break) % 60
-            percentage = (self.multiplier * .01)  # this is the percentage chance of a break
-            self.roll_chance_passed = False
-
-            try:
-                self.thieve()
-                self.update_progress((time.time() - start_time) / end_time)
-
-
-
-            except Exception as e:
-                self.log_msg(f"Exception: {e}")
-                self.loop_count += 1
-                if self.loop_count > 5:
-                    self.log_msg("Too many exceptions, stopping.")
-                    self.log_msg(f"Last exception: {e}")
-                    self.stop()
-                continue
-
-            # -- End bot actions --
-            self.loop_count = 0
-            if self.take_breaks:
-                self.check_break(runtime, percentage, minutes_since_last_break, seconds)
-            current_progress = round((time.time() - self.start_time) / self.end_time, 2)
-            if current_progress != round(self.last_progress, 2):
-                self.update_progress((time.time() - self.start_time) / self.end_time)
-                self.last_progress = round(self.progress, 2)
-
+        while time.time() - start_time < end_time:  
+            self.update_progress((time.time() - start_time) / end_time)
+            self.bot_loop_main()
         self.update_progress(1)
         self.log_msg("Finished.")
+        self.end_run()
+ 
+                      
+    def bot_loop_main(self):
+        self.check_hitpoints()
+        self.check_coin_pouches()
+        self.pickpocket_target()
+            
+
+    def check_hitpoints(self):
+        current_hp = self.api_m.get_hitpoints()
+        if current_hp[0] < 50:
+            self.log_msg("Health low")
+
+            food_id = self.get_food_id()
+            
+            food_location = self.api_m.get_first_occurrence(food_id)
+            
+            if food_location != -1:
+                self.eat_food(food_location)
+            else:
+                self.log_msg("Out of food")
+                self.find_nearest_bank()
+                self.withdraw_food()
+    
+
+    def get_food_id(self):
+        if self.food_to_use == 'Trout':
+            food_id = ids.TROUT
+        elif self.food_to_use == 'Salmon':
+            food_id = ids.SALMON
+
+        return food_id
+
+    
+    def eat_food(self, food_location):
+        self.mouse.move_to(self.win.inventory_slots[food_location].random_point())
+        self.mouse.click()
+        self.log_msg("Ate food")
+
+
+    def find_nearest_bank(self):
+        self.log_msg('Looking for bank')
+
+        while True:
+            if banks := self.get_all_tagged_in_rect(self.win.game_view, clr.YELLOW):
+                banks = sorted(banks, key=RuneLiteObject.distance_from_rect_center)
+                self.log_msg(f"Bank found")               
+                self.mouse.move_to(banks[0].random_point(), mouseSpeed='fastest')
+                time.sleep(4)
+                self.mouse.click()     
+                time.sleep(4)
+                break
+            else:
+                self.log_msg('Could not find bank') 
+
+
+    def withdraw_food(self):
+        desposit_inventory_img = imsearch.BOT_IMAGES.joinpath("bank", "deposit_inventory.png")
+
+        while True:
+            desposit_inventory = imsearch.search_img_in_rect(desposit_inventory_img, self.win.game_view)
+            if desposit_inventory:
+                break
+            time.sleep(0.1)
+   
+        food_img = self.get_food_img()
+       
+        self.log_msg('Looking for food')
+        if food := imsearch.search_img_in_rect(food_img, self.win.game_view, 0.5):
+            self.mouse.move_to(food.random_point(), mouseSpeed='fastest')
+            self.mouse.click()
+            self.log_msg('Food found')
+            pag.press('esc')
+        else:
+            self.log_msg(f"Out of food")
+            self.end_run()
+
+
+    def get_food_img(self):
+        if self.food_to_use == 'Trout':
+            food_img = imsearch.BOT_IMAGES.joinpath("items", "trout.png")
+        elif self.food_to_use == 'Salmon':
+            food_img = imsearch.BOT_IMAGES.joinpath("items", "salmon.png")
+
+        return food_img
+
+
+    def check_coin_pouches(self):
+        coin_pouch_count = self.api_m.get_inv_item_stack_amount(ids.coin_pouches)
+        if coin_pouch_count == 28:
+            self.click_coin_pouches()
+            self.log_msg("Cashed in a full stack")
+        else:
+            if rd.random_chance(probability=0.02) and coin_pouch_count > 0:
+                self.click_coin_pouches()
+                self.log_msg("Cashed in early")
+
+
+    def click_coin_pouches(self):
+        coin_pouch_location = self.api_m.get_first_occurrence(ids.coin_pouches)
+        self.mouse.move_to(self.win.inventory_slots[coin_pouch_location[0]].random_point())
+        self.mouse.click()
+
+
+    def pickpocket_target(self):
+        target = self.get_nearest_tag(clr.CYAN)
+        if target:
+            self.mouse.move_to(target.center(), mouseSpeed='fastest')
+            self.mouse.click()
+        time.sleep(0.5)
+        if rd.random_chance(probability=0.005) and self.take_breaks:
+                self.log_msg("Taking break")
+                self.take_break(max_seconds=30, fancy=True)
+      
+
+    def end_run(self):
+        ending_exp = self.api_m.get_skill_xp('Thieving')
+        total_exp_gained_run = ending_exp - self.starting_exp
+        self.log_msg(f'Total Exp Gained (Run): {total_exp_gained_run}')
+
+        total_exp_gained_session = self.api_m.get_skill_xp_gained('Thieving')
+        self.log_msg(f'Total Exp Gained (Session): {total_exp_gained_session}')
+
         self.stop()
-
-    def setup(self):
-        super().setup()
-        self.coin_pouch_count = 0
-
-    def thieve(self):
-        if self.thieving_method == "Pickpocketing":
-            self.pickpocket()
-        elif self.thieving_method == "Stalls":
-            self.steal_from_stall()
-
-    def pickpocket(self):
-
-        if self.has_hp_bar():
-            time.sleep(self.random_sleep_length(2.7, 4))
-
-        victim = self.get_nearest_tagged_NPC()
-        self.mouse.move_to(victim.scale(.5,.5).random_point())
-
-        # while click is not red, move mouse and click
-        while not self.mouse.click(check_red_click=True):
-            self.mouse.move_to(self.get_nearest_tagged_NPC().scale(.5,.5).random_point())
-
-
-        self.api_m.wait_til_gained_xp("Thieving", timeout=4)
-        self.coin_pouch_count += 1
-
-        if self.coin_pouch_count > 23 and rd.random_chance(0.3):
-            self.mouse.move_to(self.win.inventory_slots[0].random_point())
-            self.mouse.click()
-            self.coin_pouch_count = 0
-        elif self.coin_pouch_count > 27:
-            self.mouse.move_to(self.win.inventory_slots[0].random_point())
-            self.mouse.click()
-            self.coin_pouch_count = 0
-
-    def steal_from_stall(self):
-        """This will look for pink tag and left click on it"""
-        stall = self.get_nearest_tag(clr.PINK)
-
-        if stall is None:
-            time.sleep(self.random_sleep_length())
-            return
-
-        self.mouse.move_to(stall.random_point())
-
-        while not self.mouse.click(check_red_click=True):
-            stall = self.get_nearest_tag(clr.PINK)
-            if stall is None:
-                return
-            self.mouse.move_to(stall.random_point())
-        time.sleep(self.random_sleep_length(1.3, 1.5))
-
-        if self.api_m.get_is_inv_full():
-            self.drop_all()
