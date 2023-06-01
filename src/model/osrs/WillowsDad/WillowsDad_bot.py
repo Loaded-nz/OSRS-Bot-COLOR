@@ -608,7 +608,7 @@ class WillowsDadBot(OSRSBot, launcher.Launchable, metaclass=ABCMeta):
             slot_list = [0]
         # Move the mouse to each slot in the inventory and click to deposit all matching items
         for slot in slot_list:
-            self.mouse.move_to(self.win.inventory_slots[slot].random_point(), mouseSpeed = "fast")
+            self.mouse.move_to(self.win.inventory_slots[slot].random_point(), mouseSpeed = "fastest")
             self.mouse.click()
             time.sleep(self.random_sleep_length())
 
