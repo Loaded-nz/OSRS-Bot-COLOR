@@ -292,7 +292,7 @@ class OSRSWDMining(WillowsDadBot):
             time.sleep(self.random_sleep_length()/2)
             self.close_bank()
         else:
-            self.drop_all(skip_slots=self.api_m.get_inv_item_indices(self.Mining_tools))
+            self.drop_all(skip_slots=self.api_m.get_first_occurrence(self.Mining_tools))
 
     def check_equipment(self):
         """
