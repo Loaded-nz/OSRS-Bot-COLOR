@@ -58,7 +58,7 @@ class OSRSWDFishing(WillowsDadBot):
                 elif options[option] == "Bait":
                     self.style = "Bait"
                     self.fishing_tools = [ids.FISHING_ROD]
-                    self.fishing_bait = [ids.FISHING_BAIT]
+                    self.fishing_bait = [ids.FISHING_BAIT, ids.SANDWORMS]
                 elif options[option] == "Harpoon":
                     self.style = "Harpoon"
                     self.fishing_tools = [ids.HARPOON, ids.DRAGON_HARPOON, ids.BARBTAIL_HARPOON]
@@ -197,7 +197,7 @@ class OSRSWDFishing(WillowsDadBot):
                 None"""
         super().setup()
         self.idle_time = 0
-        self.deposit_ids = [ids.RAW_ANCHOVIES, ids.RAW_SHRIMPS, ids.RAW_LOBSTER, ids.RAW_TUNA, ids.RAW_SWORDFISH, ids.RAW_MONKFISH, ids.RAW_SHARK, ids.CLUE_BOTTLE_BEGINNER, ids.CLUE_BOTTLE_EASY, ids.CLUE_BOTTLE_MEDIUM, ids.CLUE_BOTTLE_HARD, ids.CLUE_BOTTLE_ELITE]
+        self.deposit_ids = [ids.RAW_ANCHOVIES, ids.RAW_SHRIMPS, ids.RAW_LOBSTER, ids.RAW_TUNA, ids.RAW_SWORDFISH, ids.RAW_MONKFISH, ids.RAW_SHARK, ids.RAW_ANGLERFISH, ids.CLUE_BOTTLE_BEGINNER, ids.CLUE_BOTTLE_EASY, ids.CLUE_BOTTLE_MEDIUM, ids.CLUE_BOTTLE_HARD, ids.CLUE_BOTTLE_ELITE]
 
         if not self.power_fishing:
             self.face_north()
