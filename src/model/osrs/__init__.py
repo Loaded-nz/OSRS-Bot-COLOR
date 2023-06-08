@@ -7,3 +7,4 @@ from .WillowsDad.WillowsDad_bot import WillowsDadBot
 from .WillowsDad.WDMining import OSRSWDMining
 from .hunterbotscript import OSRSHunter
 from .WillowsDad.WDThieving import OSRSWDThieving
+from .molchbot import OSRSMolch

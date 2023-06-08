@@ -3,9 +3,10 @@ import time
 import utilities.color as clr
 import utilities.random_util as rd
 import utilities.imagesearch as imsearch
+import utilities.game_launcher as launcher
 import pyautogui as pag
 from model.bot import BotStatus
-from model.zaros.zaros_bot import ZarosBot
+from model.osrs.osrs_bot import OSRSBot
 from utilities.api.morg_http_client import MorgHTTPSocket
 from utilities.api.status_socket import StatusSocket
 
@@ -14,7 +15,7 @@ from utilities.api.status_socket import StatusSocket
 import random
 
 
-class ZarosMolchBot(ZarosBot):
+class OSRSMolch(OSRSBot, launcher.Launchable):
     def __init__(self):
         bot_title = "Molch Bot"
         description = "Bots Molch Island aerial fishing."
