@@ -104,7 +104,7 @@ class OSRSCook(OSRSBot):
             self.stop()
 
     def withdraw_items(self):
-        fish_bank = imsearch.BOT_IMAGES.joinpath("items", f"{self.food_type.lower().replace(' ', '_')}Raw_shark_bank.png")
+        fish_bank = imsearch.BOT_IMAGES.joinpath("items", "Raw_shark_bank.png")
         try:
             if fish := imsearch.search_img_in_rect(fish_bank, self.win.game_view):
                 self.mouse.move_to(fish.random_point())
