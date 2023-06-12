@@ -21,7 +21,6 @@ class OSRSPickpocket(OSRSBot):
         self.running_time = 1
         self.take_breaks = False
         self.api_m = MorgHTTPSocket() 
-        self.starting_exp = self.api_m.get_skill_xp('Thieving')
         self.food_list = ['Trout', 'Salmon']
 
 
