@@ -50,7 +50,7 @@ class OSRSPickpocket(OSRSBot):
 
     def main_loop(self):      
         start_time = time.time()
-        end_time = self.running_time * 60
+        end_time = self.running_time * 360
         while time.time() - start_time < end_time:  
             self.update_progress((time.time() - start_time) / end_time)
             self.bot_loop_main()
