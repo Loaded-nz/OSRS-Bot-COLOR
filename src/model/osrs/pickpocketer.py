@@ -137,9 +137,9 @@ class OSRSPickpocket(OSRSBot):
 
     def get_food_img(self):
         if self.food_to_use == 'Swordfish':
-            food_img = imsearch.BOT_IMAGES.joinpath("items", "Swordfish.png")
+            food_img = imsearch.BOT_IMAGES.joinpath("items", "Swordfish_bank.png")
         elif self.food_to_use == 'Shark':
-            food_img = imsearch.BOT_IMAGES.joinpath("items", "Shark.png")
+            food_img = imsearch.BOT_IMAGES.joinpath("items", "Shark_bank.png")
 
         return food_img
 
