@@ -114,7 +114,7 @@ class OSRSPickpocket(OSRSBot):
 
 
     def withdraw_food(self):
-        desposit_inventory_img = imsearch.BOT_IMAGES.joinpath("bank", "bank_all.png")
+        desposit_inventory_img = imsearch.BOT_IMAGES.joinpath("items", "bank_all.png")
 
         while True:
             desposit_inventory = imsearch.search_img_in_rect(desposit_inventory_img, self.win.game_view)
