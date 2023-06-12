@@ -25,7 +25,7 @@ class OSRSPickpocket(OSRSBot):
 
 
     def create_options(self):
-        self.options_builder.add_slider_option("running_time", "How long to run (minutes)?", 1, 120)
+        self.options_builder.add_slider_option("running_time", "How long to run (minutes)?", 1, 360)
         self.options_builder.add_dropdown_option("food_to_use", "Select food", self.food_list)
         self.options_builder.add_checkbox_option("take_breaks", "Take breaks?", [" "])
 
