@@ -1,12 +1,14 @@
 import time
 import utilities.api.item_ids as ids
-from utilities.api.morg_http_client import MorgHTTPSocket
 import utilities.color as clr
-from utilities.geometry import RuneLiteObject
 import utilities.random_util as rd
 import pyautogui as pag
-import utilities.game_launcher as launcher
 import utilities.imagesearch as imsearch
+import utilities.game_launcher as launcher
+
+from utilities.api.morg_http_client import MorgHTTPSocket
+from utilities.geometry import RuneLiteObject
+from utilities.api.status_socket import StatusSocket
 from model.osrs.osrs_bot import OSRSBot
 
 
