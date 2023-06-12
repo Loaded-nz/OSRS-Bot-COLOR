@@ -4,7 +4,6 @@ import utilities.color as clr
 import utilities.random_util as rd
 import pyautogui as pag
 import utilities.imagesearch as imsearch
-import utilities.game_launcher as launcher
 
 from utilities.api.morg_http_client import MorgHTTPSocket
 from utilities.geometry import RuneLiteObject
@@ -12,7 +11,7 @@ from utilities.api.status_socket import StatusSocket
 from model.osrs.osrs_bot import OSRSBot
 
 
-class OSRSPickpocket(OSRSBot, launcher.Launchable):
+class OSRSPickpocket(OSRSBot):
 
     
     def __init__(self):
