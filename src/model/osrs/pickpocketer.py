@@ -21,7 +21,7 @@ class OSRSPickpocket(OSRSBot):
         self.running_time = 1
         self.take_breaks = False
         self.api_m = MorgHTTPSocket() 
-        self.food_list = ['Trout', 'Salmon']
+        self.food_list = ['Trout', 'Swordfish', 'Shark',]
 
 
     def create_options(self):
@@ -83,10 +83,10 @@ class OSRSPickpocket(OSRSBot):
     
 
     def get_food_id(self):
-        if self.food_to_use == 'Trout':
-            food_id = ids.TROUT
-        elif self.food_to_use == 'Salmon':
-            food_id = ids.SALMON
+        if self.food_to_use == 'Swordfish':
+            food_id = ids.SWORDFISH
+        elif self.food_to_use == 'Shark':
+            food_id = ids.SHARK
 
         return food_id
 
@@ -136,10 +136,10 @@ class OSRSPickpocket(OSRSBot):
 
 
     def get_food_img(self):
-        if self.food_to_use == 'Trout':
-            food_img = imsearch.BOT_IMAGES.joinpath("items", "trout.png")
-        elif self.food_to_use == 'Salmon':
-            food_img = imsearch.BOT_IMAGES.joinpath("items", "salmon.png")
+        if self.food_to_use == 'Swordfish':
+            food_img = imsearch.BOT_IMAGES.joinpath("items", "Swordfish.png")
+        elif self.food_to_use == 'Shark':
+            food_img = imsearch.BOT_IMAGES.joinpath("items", "Shark.png")
 
         return food_img
 
