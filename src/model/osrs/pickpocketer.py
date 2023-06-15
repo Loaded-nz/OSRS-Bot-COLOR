@@ -169,7 +169,7 @@ class OSRSPickpocket(OSRSBot):
         time.sleep(0.2)
         if rd.random_chance(probability=0.005) and self.take_breaks:
                 self.log_msg("Taking break")
-                self.take_break(max_seconds=30, fancy=True)
+                self.take_break(max_seconds=10, fancy=True)
       
 
     def end_run(self):
