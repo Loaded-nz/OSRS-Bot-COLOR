@@ -166,7 +166,7 @@ class OSRSPickpocket(OSRSBot):
         if target:
             self.mouse.move_to(target.center(), mouseSpeed='fastest')
             self.mouse.click()
-        time.sleep(0.5)
+        time.sleep(0.2)
         if rd.random_chance(probability=0.005) and self.take_breaks:
                 self.log_msg("Taking break")
                 self.take_break(max_seconds=30, fancy=True)
