@@ -86,7 +86,7 @@ class OSRSNMZ(OSRSBot):
         time.sleep(0.5)
         
     def __ovload(self, api: StatusSocket):
-        loadies = [ids.OVERLOAD_1, ids.OVERLOAD_3, ids.OVERLOAD_2, ids.OVERLOAD_1]
+        loadies = [ids.OVERLOAD_4, ids.OVERLOAD_3, ids.OVERLOAD_2, ids.OVERLOAD_1]
         slots = api.get_inv_item_indices(loadies)
         if len(loadies) == 0:
             self.log_msg("No ovloads found...")
