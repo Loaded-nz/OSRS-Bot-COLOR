@@ -10,3 +10,4 @@ from .WillowsDad.WDThieving import OSRSWDThieving
 from .molchbot import OSRSMolch
 from .cooking import OSRSCook
 from .pickpocketer import OSRSPickpocket
+from .nmz import OSRSNMZ
