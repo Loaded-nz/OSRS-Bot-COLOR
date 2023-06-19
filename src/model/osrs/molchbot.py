@@ -100,6 +100,9 @@ class OSRSMolch(OSRSBot, launcher.Launchable):
             if rd.random_chance(probability=.08):
                 self.__fish_chunks()
 
+            x, y = self.win.inventory_slots[-1].get_center()  # get pixel position of last slot
+            self.empty_slot_clr = pag.pixel(x, y)
+
 # TODO: Optimize the fishing pool search so you don't run all over the fucking island.
             #This debugs the issue of having the knife selected and not being able to fish.
             #if self.mouseover_text(contains="Knife"):
