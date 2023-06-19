@@ -150,7 +150,7 @@ class OSRSPickpocket(OSRSBot):
             self.click_coin_pouches()
             self.log_msg("Cashed in a full stack")
         else:
-            if rd.random_chance(probability=0.4) and coin_pouch_count > 0:
+            if rd.random_chance(probability=0.04) and coin_pouch_count > 0:
                 self.click_coin_pouches()
                 self.log_msg("Cashed in early")
 
