@@ -258,7 +258,7 @@ class OSRSWDMining(WillowsDadBot):
                     mining_spot = self.get_mining_spot()
                     if mining_spot:
                         self.mouse.move_to(mining_spot.random_point())
-                self.api_m.wait_til_gained_xp("Mining", timeout=int(self.random_sleep_length(self, delay_min=0, delay_max=0)))
+                time.sleep(1.4)
             else:
                 self.handle_no_mining_spot()
             self.breaks_skipped = afk_time // 15
