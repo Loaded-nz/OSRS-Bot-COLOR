@@ -28,7 +28,7 @@ class OSRSWDMining(WillowsDadBot):
         self.delay_max = .67
         self.ores = ids.ores
         self.power_Mining = False
-        self.Mining_tools = ids.pickaxes, ids.UNIDENTIFIED_MINERALS
+        self.Mining_tools = ids.pickaxes
         self.dragon_special = False
         self.location = "Mining Guild"
 
