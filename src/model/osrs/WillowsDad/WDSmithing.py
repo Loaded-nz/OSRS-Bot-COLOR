@@ -37,7 +37,7 @@ class OSRSWDSmithing(WillowsDadBot):
         """
         super().create_options()
         self.options_builder.add_dropdown_option("activity", "Activity?", ["Smelting", "Smithing"])
-        self.options_builder.add_dropdown_option("ore", "Ore?", ["Bronze","Iron", "Steel", "Mithril", "Adamant", "Rune"])
+        self.options_builder.add_dropdown_option("ore", "Ore?", ["Bronze","Iron", "Steel", "Mithril", "Adamant", "Rune", "Cannonball"])
 
     def save_options(self, options: dict):  # sourcery skip: for-index-underscore
         """
@@ -191,7 +191,7 @@ class OSRSWDSmithing(WillowsDadBot):
         if not self.is_bank_open():
             self.open_bank()
         self.deposit_items(self.api_m.get_first_occurrence(self.deposit_ids))
-        self.withdraw_items2(self.withdraw_locations)
+        self.withdraw_items(self.withdraw_locations)
         self.close_bank()
 
 
