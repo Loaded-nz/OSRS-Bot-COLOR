@@ -25,6 +25,7 @@ class OSRSWDSmithing(WillowsDadBot):
         self.delay_max = .67
         self.activity = "Smelting"
         self.ore = "Bronze"
+        self.smithing_tools = [ids.DOUBLE_AMMO_MOULD]
         self.withdraw_locations = []
 
 
@@ -49,6 +50,7 @@ class OSRSWDSmithing(WillowsDadBot):
         for option in options:
             if option == "activity":
                 self.activity = options[option]
+                self.smithing_tools = [ids.DOUBLE_AMMO_MOULD]
             elif option == "ore":
                 self.ore = options[option]
 
