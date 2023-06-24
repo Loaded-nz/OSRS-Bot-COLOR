@@ -38,7 +38,7 @@ class OSRSWDSmithing(WillowsDadBot):
         """
         super().create_options()
         self.options_builder.add_dropdown_option("activity", "Activity?", ["Smelting", "Smithing"])
-        self.options_builder.add_dropdown_option("ore", "Ore?", ["Bronze","Iron", "Steel", "Mithril", "Adamant", "Rune", "Cannonball"])
+        self.options_builder.add_dropdown_option("ore", "Ore?", ["Bronze", "Iron", "Gold", "Steel", "Mithril", "Adamant", "Rune", "Cannonball"])
 
     def save_options(self, options: dict):  # sourcery skip: for-index-underscore
         """
@@ -137,8 +137,8 @@ class OSRSWDSmithing(WillowsDadBot):
                 None"""
         super().setup()
         
-        self.deposit_ids = [ids.BRONZE_BAR, ids.IRON_BAR, ids.STEEL_BAR, ids.MITHRIL_BAR, ids.ADAMANTITE_BAR, ids.RUNITE_BAR, ids.CANNONBALL]
-        self.withdraw_ids = [ids.COPPER_ORE, ids.TIN_ORE, ids.IRON_ORE, ids.COAL, ids.MITHRIL_ORE, ids.ADAMANTITE_ORE, ids.RUNITE_ORE, ids.STEEL_BAR]
+        self.deposit_ids = [ids.BRONZE_BAR, ids.IRON_BAR, ids.STEEL_BAR, ids.GOLD_BAR, ids.MITHRIL_BAR, ids.ADAMANTITE_BAR, ids.RUNITE_BAR, ids.CANNONBALL]
+        self.withdraw_ids = [ids.COPPER_ORE, ids.TIN_ORE, ids.IRON_ORE, ids.COAL, ids.GOLD_ORE, ids.MITHRIL_ORE, ids.ADAMANTITE_ORE, ids.RUNITE_ORE, ids.STEEL_BAR]
         self.smelt_image = self.WILLOWSDAD_IMAGES.joinpath(f"{self.ore}_option.png")
         self.face_north()
 
