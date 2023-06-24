@@ -135,8 +135,8 @@ class OSRSWDSmithing(WillowsDadBot):
                 None"""
         super().setup()
         
-        self.deposit_ids = [ids.BRONZE_BAR, ids.IRON_BAR, ids.STEEL_BAR, ids.GOLD_BAR, ids.MITHRIL_BAR, ids.ADAMANTITE_BAR, ids.RUNITE_BAR]
-        self.withdraw_ids = [ids.COPPER_ORE, ids.TIN_ORE, ids.IRON_ORE, ids.COAL, ids.GOLD_ORE, ids.MITHRIL_ORE, ids.ADAMANTITE_ORE, ids.RUNITE_ORE]
+        self.deposit_ids = [ids.BRONZE_BAR, ids.IRON_BAR, ids.STEEL_BAR, ids.MITHRIL_BAR, ids.ADAMANTITE_BAR, ids.RUNITE_BAR]
+        self.withdraw_ids = [ids.COPPER_ORE, ids.TIN_ORE, ids.IRON_ORE, ids.COAL, ids.MITHRIL_ORE, ids.ADAMANTITE_ORE, ids.RUNITE_ORE]
         self.smelt_image = self.WILLOWSDAD_IMAGES.joinpath(f"{self.ore}_option.png")
         self.face_north()
 
