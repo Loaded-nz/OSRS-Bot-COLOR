@@ -59,7 +59,7 @@ class OSRSHunter(OSRSBot, launcher.Launchable):
                 self.mouse.move_to(caught_trap[0].center(), mouseSpeed="fast")
                 self.log_msg("Caught the chin $$$")
                 if self.mouseover_text(contains= "Reset", color=clr.OFF_WHITE):
-                    self.mouse.click()
+                    self.mouse.click(check_red_click=True)
                     time.sleep(7.75)
         
         if not self.get_nearest_tag(clr.PINK):
@@ -67,14 +67,14 @@ class OSRSHunter(OSRSBot, launcher.Launchable):
                 self.log_msg("Slippery chinchompa got away :(")
                 self.mouse.move_to(failed_trap[0].center(), mouseSpeed='fast')
                 if self.mouseover_text(contains= "Reset", color=clr.OFF_WHITE):
-                    self.mouse.click()
+                    self.mouse.click(check_red_click=True)
                     time.sleep(7.75)      
         
         if reset_trap := self.get_nearest_tag(clr.OFF_YELLOW):
             self.log_msg("Resetting trap, must of had a funny smell..")
             self.mouse.move_to(reset_trap.random_point(), mouseSpeed='fast')
             if self.mouseover_text(contains= "Lay", color=clr.OFF_WHITE):
-                self.mouse.click()
+                self.mouse.click(check_red_click=True)
                 time.sleep(5.5)
             
         
