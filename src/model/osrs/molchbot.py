@@ -111,10 +111,10 @@ class OSRSMolch(OSRSBot, launcher.Launchable):
 
 
 
-            pools = self.get_all_tagged_in_rect(self.win.game_view, clr.CYAN)
+            pools = self.get_all_tagged_in_rect(self.win.game_view, clr.PINK)
             self.log_msg("Fishing...")
             for fish in pools:
-                if fish := self.get_nearest_tag(clr.CYAN):
+                if fish := self.get_nearest_tag(clr.PINK):
                     n = 0
 
                     self.mouse.move_to(fish.random_point())
