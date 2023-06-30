@@ -62,13 +62,16 @@ class OSRSNMZ(OSRSBot):
                 absorb_timer = time.time()
                 absorb_interval = random.randint(60, 125)
 
+            if time.time() - strength_timer > strength_interval:
+                #print(f"{current_time} Waited {strength_interval}s before clicking a strength")
+                self.__sspot(api)
+                strength_timer = time.time()
+                strength_interval = random.randint(250, 300)
+            
             if hp := api_m.get_hitpoints():
                 if hp[0] > 1 and api.get_is_boosted("ATTACK") == True:
                     #print(f"{current_time} More than 1hp, trying to drain")
                     self.__drock(api)
-                elif hp[0] >= 51 and api.get_is_boosted("ATTACK") == False:
-                    #print(f"{current_time} 51 or more hp, Not boosted, trying to boost")
-                    self.__ovload(api)
 
             # Update progress
             self.update_progress((time.time() - start_time) / end_time)
@@ -85,13 +88,13 @@ class OSRSNMZ(OSRSBot):
         self.mouse.click()
         time.sleep(0.5)
         
-    def __ovload(self, api: StatusSocket):
-        loadies = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
-        slots = api.get_inv_item_indices(loadies)
-        if len(loadies) == 0:
-            self.log_msg("No ovloads found...")
+    def __sspot(self, api: StatusSocket):
+        sspots = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
+        slots = api.get_inv_item_indices(sspots)
+        if len(sspots) == 0:
+            self.log_msg("No sspots found...")
             return
-        self.log_msg("Sippin loads......")
+        self.log_msg("Sippin pot......")
         self.mouse.move_to(self.win.inventory_slots[slots[0]].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(9)
