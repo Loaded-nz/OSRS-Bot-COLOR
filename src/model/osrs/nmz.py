@@ -62,7 +62,7 @@ class OSRSNMZ(OSRSBot):
                 absorb_timer = time.time()
                 absorb_interval = random.randint(60, 125)
 
-            if time.time() - strength_timer > strength_interval:
+            elif time.time() - strength_timer > strength_interval:
                 #print(f"{current_time} Waited {strength_interval}s before clicking a strength")
                 self.__sspot(api)
                 strength_timer = time.time()
