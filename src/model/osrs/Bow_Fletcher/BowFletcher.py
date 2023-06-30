@@ -316,7 +316,7 @@ class OSRSBowFletcher(OSRSBot, launcher.Launchable):
         
         if Fletch_item in Bow_recipes.Bow_recipes:
             ingredients = Bow_recipes.Bow_recipes[Fletch_item]
-            ingredient1, ingredient2,ingredient3 = ingredients
+            ingredient1, ingredient2, ingredient3 = ingredients
             print(ingredient1,ingredient2)
         else:
             self.log_msg(f"No recipe found for {Fletch_item}")
