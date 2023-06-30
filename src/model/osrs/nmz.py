@@ -66,7 +66,7 @@ class OSRSNMZ(OSRSBot):
                 #print(f"{current_time} Waited {strength_interval}s before clicking a strength")
                 self.__sspot(api)
                 start_time = time.time()
-                end_time = 300
+                end_time = (300)
             
             if hp := api_m.get_hitpoints():
                 if hp[0] > 1:
