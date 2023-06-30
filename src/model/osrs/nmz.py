@@ -62,14 +62,14 @@ class OSRSNMZ(OSRSBot):
                 absorb_timer = time.time()
                 absorb_interval = random.randint(60, 125)
 
-            elif time.time() - strength_timer > strength_interval:
+            if time.time() - start_time < end_time:
                 #print(f"{current_time} Waited {strength_interval}s before clicking a strength")
                 self.__sspot(api)
-                strength_timer = time.time()
-                strength_interval = random.randint(250, 300)
+                start_time = time.time()
+                end_time = 300
             
             if hp := api_m.get_hitpoints():
-                if hp[0] > 1 and api.get_is_boosted("ATTACK") == True:
+                if hp[0] > 1:
                     #print(f"{current_time} More than 1hp, trying to drain")
                     self.__drock(api)
 
