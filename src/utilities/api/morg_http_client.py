@@ -344,6 +344,21 @@ class MorgHTTPSocket:
         elif isinstance(item_id, list):
             return [i for i, inventory_slot in enumerate(data) if inventory_slot["id"] in item_id]
 
+    def get_inv(self):
+        """
+        Gets the users inventory
+        Returns:
+            List of dictionaries, each containing index, ID, and quantity of an item.
+        """
+        data = self.__do_get(endpoint=self.inv_endpoint)
+        inventory = []
+        for index, item in enumerate(data):
+            if item['quantity'] == 0:
+                continue
+            item_info = {'index': index, 'id': item['id'], 'quantity': item['quantity']}
+            inventory.append(item_info)
+        return inventory
+    
     def get_first_occurrence(self, item_id: Union[List[int], int]) -> Union[int, List[int]]:
         """
         For the given item ID(s), returns the first inventory slot index that the item exists in.
