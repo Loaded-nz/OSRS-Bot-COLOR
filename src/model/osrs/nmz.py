@@ -76,7 +76,7 @@ class OSRSNMZ(OSRSBot):
     def __absorb(self, api: StatusSocket):
         #self.log_msg("Absorption is low.")
         abbys = [ids.ABSORPTION_4, ids.ABSORPTION_3, ids.ABSORPTION_2, ids.ABSORPTION_1]
-        slots = api.get_inv_item_indices(abbys)
+        slots = api.get_inv(abbys)
         if len(abbys) == 0:
             self.log_msg("No Absorption pots found...")
             return
@@ -87,7 +87,7 @@ class OSRSNMZ(OSRSBot):
         
     def __sspot(self, api: StatusSocket):
         sspots = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
-        slots = api.get_inv_item_indices(sspots)
+        slots = api.get_inv(sspots)
         if len(sspots) == 0:
             self.log_msg("No sspots found...")
             return
@@ -98,7 +98,7 @@ class OSRSNMZ(OSRSBot):
         
     def __drock(self, api: StatusSocket):
         rock = [ids.DWARVEN_ROCK_CAKE, ids.DWARVEN_ROCK_CAKE_7510]
-        slots = api.get_inv_item_indices(rock)
+        slots = api.get_inv(rock)
         if len(rock) == 0:
             self.log_msg("No dwarven rock cake found...")
             return
