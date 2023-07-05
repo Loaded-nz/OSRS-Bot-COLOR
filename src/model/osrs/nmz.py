@@ -98,7 +98,7 @@ class OSRSNMZ(OSRSBot):
         
     def __drock(self, api_m: StatusSocket):
         rock = [ids.DWARVEN_ROCK_CAKE, ids.DWARVEN_ROCK_CAKE_7510]
-        slots = api_m.get_inv(rock)
+        slots = api_m.get_inv(self, rock)
         if len(rock) == 0:
             self.log_msg("No dwarven rock cake found...")
             return
