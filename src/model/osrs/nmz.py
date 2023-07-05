@@ -66,7 +66,7 @@ class OSRSNMZ(OSRSBot):
                 if hp[0] > 1:
                     #print(f"{current_time} More than 1hp, trying to drain")
                     self.__drock(api_m)
-                elif api.get_is_boosted("STRENGTH") == False:
+                elif api_m.get_is_boosted("STRENGTH") == False:
                     #print(f"{current_time} 51 or more hp, Not boosted, trying to boost")
                     self.__sspot(api_m)
 
