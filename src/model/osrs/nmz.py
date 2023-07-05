@@ -58,25 +58,25 @@ class OSRSNMZ(OSRSBot):
             # Absorb every 60 seconds
             if time.time() - absorb_timer > absorb_interval:
                 #print(f"{current_time} Waited {absorb_interval}s before clicking an absorb")
-                self.__absorb(api)
+                self.__absorb(api_m)
                 absorb_timer = time.time()
                 absorb_interval = random.randint(60, 125)
 
             if hp := api_m.get_hitpoints():
                 if hp[0] > 1:
                     #print(f"{current_time} More than 1hp, trying to drain")
-                    self.__drock(api)
+                    self.__drock(api_m)
                 elif api.get_is_boosted("STRENGTH") == False:
                     #print(f"{current_time} 51 or more hp, Not boosted, trying to boost")
-                    self.__sspot(api)
+                    self.__sspot(api_m)
 
             # Update progress
             self.update_progress((time.time() - start_time) / end_time)
                     
-    def __absorb(self, api: StatusSocket):
+    def __absorb(self, api_m: StatusSocket):
         #self.log_msg("Absorption is low.")
         abbys = [ids.ABSORPTION_4, ids.ABSORPTION_3, ids.ABSORPTION_2, ids.ABSORPTION_1]
-        slots = api.get_inv(abbys)
+        slots = api_m.get_inv(abbys)
         if len(abbys) == 0:
             self.log_msg("No Absorption pots found...")
             return
@@ -85,9 +85,9 @@ class OSRSNMZ(OSRSBot):
         self.mouse.click()
         time.sleep(0.5)
         
-    def __sspot(self, api: StatusSocket):
+    def __sspot(self, api_m: StatusSocket):
         sspots = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
-        slots = api.get_inv(sspots)
+        slots = api_m.get_inv(sspots)
         if len(sspots) == 0:
             self.log_msg("No sspots found...")
             return
@@ -96,9 +96,9 @@ class OSRSNMZ(OSRSBot):
         self.mouse.click()
         time.sleep(9)
         
-    def __drock(self, api: StatusSocket):
+    def __drock(self, api_m: StatusSocket):
         rock = [ids.DWARVEN_ROCK_CAKE, ids.DWARVEN_ROCK_CAKE_7510]
-        slots = api.get_inv(rock)
+        slots = api_m.get_inv(rock)
         if len(rock) == 0:
             self.log_msg("No dwarven rock cake found...")
             return
