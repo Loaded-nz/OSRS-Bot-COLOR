@@ -66,14 +66,16 @@ class OSRSNMZ(OSRSBot):
                 if hp[0] > 1:
                     #print(f"{current_time} More than 1hp, trying to drain")
                     self.__drock(api_m)
-                elif api_m.get_is_boosted("STRENGTH") == False:
-                    #print(f"{current_time} 51 or more hp, Not boosted, trying to boost")
+                elif time.time() - strenght_timer > strength_interval:
+                    #print(f"{current_time} Not str boosted, trying to boost")
                     self.__sspot(api_m)
+                    strenght_timer = time.time()
+                    strength_interval = random.randint(600, 660)
 
             # Update progress
             self.update_progress((time.time() - start_time) / end_time)
                     
-    def __absorb(self, api_m: StatusSocket):
+    def __absorb(self, api_m: MorgHTTPSocket):
         #self.log_msg("Absorption is low.")
         abbys = [ids.ABSORPTION_4, ids.ABSORPTION_3, ids.ABSORPTION_2, ids.ABSORPTION_1]
         slots = api_m.get_inv()
@@ -85,7 +87,7 @@ class OSRSNMZ(OSRSBot):
         self.mouse.click()
         time.sleep(0.5)
         
-    def __sspot(self, api_m: StatusSocket):
+    def __sspot(self, api_m: MorgHTTPSocket):
         sspots = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
         slots = api_m.get_inv()
         if len(sspots) == 0:
@@ -96,7 +98,7 @@ class OSRSNMZ(OSRSBot):
         self.mouse.click()
         time.sleep(9)
         
-    def __drock(self, api_m: StatusSocket):
+    def __drock(self, api_m: MorgHTTPSocket):
         rock = [ids.DWARVEN_ROCK_CAKE, ids.DWARVEN_ROCK_CAKE_7510]
         slots = api_m.get_inv()
         if len(rock) == 0:
