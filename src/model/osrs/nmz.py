@@ -105,7 +105,7 @@ class OSRSNMZ(OSRSBot):
             self.log_msg("No dwarven rock cake found...")
             return
         self.log_msg("Chewin rock...")
-        self.mouse.move_to(self.win.inventory_slots[slots].random_point(), mouseSpeed = "fastest")
+        self.mouse.move_to(rock, mouseSpeed = "fastest")
         self.mouse.click()
         time.sleep(0.5)
         
