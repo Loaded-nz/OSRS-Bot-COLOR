@@ -78,7 +78,7 @@ class OSRSNMZ(OSRSBot):
     def __absorb(self, api_m: MorgHTTPSocket):
         #self.log_msg("Absorption is low.")
         abbys = [ids.ABSORPTION_4, ids.ABSORPTION_3, ids.ABSORPTION_2, ids.ABSORPTION_1]
-        slots = api_m.get_inv(self)
+        slots = api_m.get_inv_item_indices(abbys)
         if len(abbys) == 0:
             self.log_msg("No Absorption pots found...")
             return
@@ -89,7 +89,7 @@ class OSRSNMZ(OSRSBot):
         
     def __sspot(self, api_m: MorgHTTPSocket):
         sspots = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
-        slots = api_m.get_inv(self)
+        slots = api_m.get_inv_item_indices(sspots)
         if len(sspots) == 0:
             self.log_msg("No sspots found...")
             return
@@ -100,12 +100,12 @@ class OSRSNMZ(OSRSBot):
         
     def __drock(self, api_m: MorgHTTPSocket):
         rock = [ids.DWARVEN_ROCK_CAKE, ids.DWARVEN_ROCK_CAKE_7510]
-        slots = api_m.get_inv()
+        slots = api_m.get_inv_item_indices(rock)
         if len(rock) == 0:
             self.log_msg("No dwarven rock cake found...")
             return
         self.log_msg("Chewin rock...")
-        self.mouse.move_to(rock, mouseSpeed = "fastest")
+        self.mouse.move_to(self.win.inventory_slots[0].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(0.5)
         
