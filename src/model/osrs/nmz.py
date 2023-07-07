@@ -78,23 +78,23 @@ class OSRSNMZ(OSRSBot):
     def __absorb(self, api_m: MorgHTTPSocket):
         #self.log_msg("Absorption is low.")
         abbys = [ids.ABSORPTION_4, ids.ABSORPTION_3, ids.ABSORPTION_2, ids.ABSORPTION_1]
-        slots = api_m.get_inv_item_indices(abbys)
+        slots = api_m.get_first_occurrence(abbys)
         if len(abbys) == 0:
             self.log_msg("No Absorption pots found...")
             return
         self.log_msg("Chuggin Absorption...")
-        self.mouse.move_to(self.win.inventory_slots[slots].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.inventory_slots[abbys[0]].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(0.5)
         
     def __sspot(self, api_m: MorgHTTPSocket):
         sspots = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
-        slots = api_m.get_inv_item_indices(sspots)
+        slots = api_m.get_first_occurrence(sspots)
         if len(sspots) == 0:
             self.log_msg("No sspots found...")
             return
         self.log_msg("Sippin pot......")
-        self.mouse.move_to(self.win.inventory_slots[slots].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.inventory_slots[sspots[0]].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(9)
         
