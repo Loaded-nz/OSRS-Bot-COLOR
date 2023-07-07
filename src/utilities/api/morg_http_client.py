@@ -298,16 +298,16 @@ class MorgHTTPSocket:
 
     def get_inv(self):
         """
-        Gets a list of dicts representing the player inventory.
+        Gets the users inventory
         Returns:
             List of dictionaries, each containing index, ID, and quantity of an item.
         """
         data = self.__do_get(endpoint=self.inv_endpoint)
         inventory = []
         for index, item in enumerate(data):
-            if item["quantity"] == 0:
+            if item['quantity'] == 0:
                 continue
-            item_info = {"index": index, "id": item["id"], "quantity": item["quantity"]}
+            item_info = {'index': index, 'id': item['id'], 'quantity': item['quantity']}
             inventory.append(item_info)
         return inventory
 
