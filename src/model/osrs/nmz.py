@@ -83,7 +83,7 @@ class OSRSNMZ(OSRSBot):
             self.log_msg("No Absorption pots found...")
             return
         self.log_msg("Chuggin Absorption...")
-        self.mouse.move_to(self.win.inventory_slots[abbys[0]].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.inventory_slots[abbys].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(0.5)
         
