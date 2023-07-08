@@ -58,7 +58,7 @@ class OSRSNMZ(OSRSBot):
             # Absorb every 60 seconds
             if time.time() - absorb_timer > absorb_interval:
                 #print(f"{current_time} Waited {absorb_interval}s before clicking an absorb")
-                self.__absorb(api_m)
+                self.__absorb(api)
                 absorb_timer = time.time()
                 absorb_interval = random.randint(60, 125)
 
@@ -66,46 +66,44 @@ class OSRSNMZ(OSRSBot):
                 if hp[0] > 1:
                     #print(f"{current_time} More than 1hp, trying to drain")
                     self.__drock(api_m)
-                elif time.time() - strenght_timer > strength_interval:
-                    #print(f"{current_time} Not str boosted, trying to boost")
-                    self.__sspot(api_m)
-                    strenght_timer = time.time()
-                    strength_interval = random.randint(600, 660)
+                elif api.get_is_boosted("STRENGTH") == False:
+                    #print(f"{current_time}Not boosted, trying to boost")
+                    self.__sspot(api)
 
             # Update progress
             self.update_progress((time.time() - start_time) / end_time)
                     
-    def __absorb(self, api_m: MorgHTTPSocket):
+    def __absorb(self, api: StatusSocket):
         #self.log_msg("Absorption is low.")
         abbys = [ids.ABSORPTION_4, ids.ABSORPTION_3, ids.ABSORPTION_2, ids.ABSORPTION_1]
-        slots = api_m.get_first_occurrence(abbys)
+        slots = api.get_inv_item_indices(abbys)
         if len(abbys) == 0:
             self.log_msg("No Absorption pots found...")
             return
         self.log_msg("Chuggin Absorption...")
-        self.mouse.move_to(self.win.inventory_slots[abbys].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.inventory_slots[slots[0]].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(0.5)
         
-    def __sspot(self, api_m: MorgHTTPSocket):
+    def __sspot(self, api: StatusSocket):
         sspots = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
-        slots = api_m.get_first_occurrence(sspots)
+        slots = api.get_inv_item_indices(sspots)
         if len(sspots) == 0:
             self.log_msg("No sspots found...")
             return
         self.log_msg("Sippin pot......")
-        self.mouse.move_to(self.win.inventory_slots[sspots[0]].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.inventory_slots[slots[0]].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(9)
         
-    def __drock(self, api_m: MorgHTTPSocket):
+    def __drock(self, api: StatusSocket):
         rock = [ids.DWARVEN_ROCK_CAKE, ids.DWARVEN_ROCK_CAKE_7510]
-        slots = api_m.get_inv_item_indices(rock)
+        slots = api.get_inv_item_indices(rock)
         if len(rock) == 0:
             self.log_msg("No dwarven rock cake found...")
             return
         self.log_msg("Chewin rock...")
-        self.mouse.move_to(self.win.inventory_slots[0].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.inventory_slots[slots[0]].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(0.5)
         
