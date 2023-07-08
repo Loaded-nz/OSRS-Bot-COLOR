@@ -73,10 +73,10 @@ class OSRSNMZ(OSRSBot):
             # Update progress
             self.update_progress((time.time() - start_time) / end_time)
                     
-    def __absorb(self, api: StatusSocket):
+    def __absorb(self, api: MorgHTTPSocket):
         #self.log_msg("Absorption is low.")
         abbys = [ids.ABSORPTION_4, ids.ABSORPTION_3, ids.ABSORPTION_2, ids.ABSORPTION_1]
-        slots = api.get_inv()
+        slots = api.m.get_first_occurrence()
         if len(abbys) == 0:
             self.log_msg("No Absorption pots found...")
             return
@@ -85,7 +85,7 @@ class OSRSNMZ(OSRSBot):
         self.mouse.click()
         time.sleep(0.5)
         
-    def __sspot(self, api: StatusSocket):
+    def __sspot(self, api: MorgHTTPSocket):
         sspots = [ids.SUPER_STRENGTH4, ids.SUPER_STRENGTH3, ids.SUPER_STRENGTH2, ids.SUPER_STRENGTH1]
         slots = api.get_inv()
         if len(sspots) == 0:
@@ -96,7 +96,7 @@ class OSRSNMZ(OSRSBot):
         self.mouse.click()
         time.sleep(9)
         
-    def __drock(self, api: StatusSocket):
+    def __drock(self, api: MorgHTTPSocket):
         rock = [ids.DWARVEN_ROCK_CAKE, ids.DWARVEN_ROCK_CAKE_7510]
         slots = api.get_inv()
         if len(rock) == 0:
