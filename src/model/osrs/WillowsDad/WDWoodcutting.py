@@ -167,6 +167,7 @@ class OSRSWDWoodcutting(WillowsDadBot):
         if not self.get_nearest_tag(clr.PINK):
             found = self.adjust_camera(clr.PINK)
             if not found:
+                time.sleep(60)
                 self.log_msg("Trees should be tagged with pink, and in screen view. Please fix this.")
                 self.stop()
         
