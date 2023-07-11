@@ -58,17 +58,17 @@ class OSRSNMZ(OSRSBot):
             # Absorb every 60 seconds
             if time.time() - absorb_timer > absorb_interval:
                 #print(f"{current_time} Waited {absorb_interval}s before clicking an absorb")
-                self.__absorb(api)
+                self.__absorb(api_m)
                 absorb_timer = time.time()
                 absorb_interval = random.randint(60, 125)
 
             if hp := api_m.get_hitpoints():
                 if hp[0] > 1:
                     #print(f"{current_time} More than 1hp, trying to drain")
-                    self.__drock(api)
+                    self.__drock(api_m)
                 elif api.get_is_boosted("STRENGTH") == False:
                     #print(f"{current_time}Not boosted, trying to boost")
-                    self.__sspot(api)
+                    self.__sspot(api_m)
 
             # Update progress
             self.update_progress((time.time() - start_time) / end_time)
