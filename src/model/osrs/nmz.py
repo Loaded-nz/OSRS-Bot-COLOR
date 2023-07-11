@@ -81,7 +81,7 @@ class OSRSNMZ(OSRSBot):
             self.log_msg("No Absorption pots found...")
             return
         self.log_msg("Chuggin Absorption...")
-        self.mouse.move_to(self.win.inventory_slots[slots[0]].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.cp_tabs[3].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(0.5)
         
@@ -92,7 +92,7 @@ class OSRSNMZ(OSRSBot):
             self.log_msg("No sspots found...")
             return
         self.log_msg("Sippin pot......")
-        self.mouse.move_to(self.win.inventory_slots[slots[0]].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.cp_tabs[3].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(9)
         
@@ -103,7 +103,7 @@ class OSRSNMZ(OSRSBot):
             self.log_msg("No dwarven rock cake found...")
             return
         self.log_msg("Chewin rock...")
-        self.mouse.move_to(self.win.inventory_slots[slots[0]].random_point(), mousespeed="fastest")
+        self.mouse.move_to(self.win.cp_tabs[3].random_point(), mousespeed="fastest")
         self.mouse.click()
         time.sleep(0.5)
         
