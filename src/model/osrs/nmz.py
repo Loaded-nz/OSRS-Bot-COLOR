@@ -76,7 +76,7 @@ class OSRSNMZ(OSRSBot):
     def __absorb(self, api_m: MorgHTTPSocket):
         #self.log_msg("Absorption is low.")
         abbys = [ids.ABSORPTION_4, ids.ABSORPTION_3, ids.ABSORPTION_2, ids.ABSORPTION_1]
-        slots = api_m.get_first_occurrence()
+        slots = api_m.get_inv()
         if len(abbys) == 0:
             self.log_msg("No Absorption pots found...")
             return
