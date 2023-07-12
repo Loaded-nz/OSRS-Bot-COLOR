@@ -138,11 +138,11 @@ class OSRSWDDegrimer(WillowsDadBot):
             minutes_since_last_break = int((time.time() - self.last_break) / 60)
             seconds = int(time.time() - self.last_break) % 60
             percentage = (self.multiplier * .01)  # this is the percentage chance of a break
-            deposit_slots = self.api_m.get_inv_item_first_indice(self.deposit_ids)
+            deposit_slots = self.api_m.get_first_occurrence(self.deposit_ids)
             self.roll_chance_passed = False
 
             try:
-                if len(self.api_m.get_inv_item_indices(self.withdraw_ids)) == 0:
+                if len(self.api_m.get_is_inv_full(self.withdraw_ids)) == 0:
                     while not self.is_bank_open():
                         self.open_bank()
                         time.sleep(self.random_sleep_length())
@@ -213,7 +213,7 @@ class OSRSWDDegrimer(WillowsDadBot):
         afk__start_time = time.time() 
         
         # loop until no more items in inventory match the withdraw_ids
-        while len(self.api_m.get_inv_item_indices(self.withdraw_ids)) != 0:
+        while len(self.api_m.get_first_occurrence(self.withdraw_ids)) != 0:
             # sleep for a random amount of time
             time.sleep(self.random_sleep_length(.65, 2.2))
             afk_time = int(time.time() - afk__start_time)
@@ -242,7 +242,7 @@ class OSRSWDDegrimer(WillowsDadBot):
         s_motion_indices = [0, 4, 8, 12, 16, 20, 24, 25, 21, 17, 13, 9, 5, 1, 2, 6, 10, 14, 18, 22, 26, 27, 23, 19, 15, 11, 7, 3]
 
         # Get all items in inventory that match the withdraw_ids
-        items = self.api_m.get_inv_item_indices(self.withdraw_ids)
+        items = self.api_m.get_first_occurrence(self.withdraw_ids)
 
         # Filter s_motion_indices to include only those indices that are in the items list
         s_motion_items = [index for index in s_motion_indices if index in items]
