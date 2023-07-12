@@ -142,7 +142,7 @@ class OSRSWDDegrimer(WillowsDadBot):
             self.roll_chance_passed = False
 
             try:
-                if len(self.api_m.get_is_inv_full(self.withdraw_ids)) == 0:
+                if self.api_m.get_is_inv_full():
                     while not self.is_bank_open():
                         self.open_bank()
                         time.sleep(self.random_sleep_length())
