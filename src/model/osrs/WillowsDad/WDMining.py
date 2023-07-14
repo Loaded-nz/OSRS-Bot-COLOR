@@ -294,7 +294,7 @@ class OSRSWDMining(WillowsDadBot):
         else:
             self.get_nearest_tag(clr.YELLOW)
             self.mouse.move_to(self.get_nearest_tag(clr.YELLOW).random_point())
-            self.mouse.click()
+            self.mouse.click(check_red_click=True)
             time.sleep(self.random_sleep_length())
 
     def check_equipment(self):
