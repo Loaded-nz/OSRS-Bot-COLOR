@@ -297,7 +297,7 @@ class OSRSWDMining(WillowsDadBot):
                 while not self.mouse.click(check_red_click=True):
                     if Grinder := self.get_nearest_tag(clr.YELLOW):
                         self.mouse.move_to(Grinder.random_point())
-                self.api_m.get_is_player_idle(self,4)
+                self.api_m.get_is_player_idle(self)
 
     def check_equipment(self):
         """
