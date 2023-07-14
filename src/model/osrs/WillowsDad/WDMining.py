@@ -295,7 +295,7 @@ class OSRSWDMining(WillowsDadBot):
             if Grinder := self.get_nearest_tag(clr.YELLOW):
                 self.mouse.move_to(Grinder.random_point())
                 while not self.mouse.click(check_red_click=True):
-                    if Grinder := self.get_nearest_tag(clr.PINK):
+                    if Grinder := self.get_nearest_tag(clr.YELLOW):
                         self.mouse.move_to(Grinder.random_point())
                 time.sleep(self.random_sleep_length())  
 
