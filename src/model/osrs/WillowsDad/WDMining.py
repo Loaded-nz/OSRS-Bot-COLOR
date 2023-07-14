@@ -292,9 +292,12 @@ class OSRSWDMining(WillowsDadBot):
             time.sleep(self.random_sleep_length()/2)
             self.close_bank()
         else:
-            if self.get_nearest_tag(clr.YELLOW):
-                        self.mouse.move_to(self.get_nearest_tag(clr.YELLOW).random_point())
-                        self.mouse.click()
+            if Grinder := self.get_nearest_tag(clr.YELLOW):
+                self.mouse.move_to(Grinder.random_point())
+                while not self.mouse.click(check_red_click=True):
+                    if Grinder := self.get_nearest_tag(clr.PINK):
+                        self.mouse.move_to(Grinder.random_point())
+                time.sleep(self.random_sleep_length())  
 
     def check_equipment(self):
         """
