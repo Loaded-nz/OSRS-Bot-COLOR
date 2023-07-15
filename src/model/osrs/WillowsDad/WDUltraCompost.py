@@ -63,7 +63,7 @@ class OSRSWDUltraCompostMaker(WillowsDadBot):
             minutes_since_last_break = int((time.time() - self.last_break) / 60)
             seconds = int(time.time() - self.last_break) % 60
             percentage = (self.multiplier * .01)  # this is the percentage chance of a break
-            deposit_slots = self.api_m.get_inv_item_first_indice(self.deposit_ids)
+            deposit_slots = self.api_m.get_first_occurrence(self.deposit_ids)
             self.roll_chance_passed = False
 
             try:
@@ -180,7 +180,7 @@ class OSRSWDUltraCompostMaker(WillowsDadBot):
             None
         """
         # get unique items in inventory
-        unique_items = self.api_m.get_inv_item_first_indice(self.withdraw_ids)
+        unique_items = self.api_m.get_first_occurrence(self.withdraw_ids)
 
         # move mouse to each item and click
         for item in unique_items:
