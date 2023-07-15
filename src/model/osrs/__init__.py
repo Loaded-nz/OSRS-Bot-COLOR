@@ -10,3 +10,4 @@ from .pickpocketer import OSRSPickpocket
 from .nmz import OSRSNMZ
 from .Cannonballs import Smithing
 from .Bow_Fletcher.BowFletcher import OSRSBowFletcher
+from .altar import OSRSAltar
