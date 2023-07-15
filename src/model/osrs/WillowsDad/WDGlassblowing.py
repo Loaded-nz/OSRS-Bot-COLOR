@@ -181,7 +181,7 @@ class OSRSWDGlassblowing(WillowsDadBot):
             None
         """
         # get unique items in inventory
-        unique_items = self.api_m.get_inv_item_indices(self.withdraw_ids,self.blowing_tools)
+        unique_items = self.api_m.get_inv_item_indices(self.withdraw_ids, ids.GLASSBLOWING_PIPE)
 
         # move mouse to each item and click
         for item in unique_items:
