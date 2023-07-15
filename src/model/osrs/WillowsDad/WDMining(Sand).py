@@ -17,7 +17,7 @@ from pathlib import Path
 
 class OSRSWDMining(WillowsDadBot):
     def __init__(self):
-        bot_title = "WillowsDad Mining"
+        bot_title = "WillowsDad Mining + Sand"
         description = """Mines at supported locations."""
         super().__init__(bot_title=bot_title, description=description)
         # Set option variables below (initial value is only used during UI-less testing)
