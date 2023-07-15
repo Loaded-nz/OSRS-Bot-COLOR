@@ -115,7 +115,7 @@ class OSRSWDGlassblowing(WillowsDadBot):
             Returns:
                 None"""
         super().setup()
-        self.withdraw_ids = [ids.MOLTEN_GLASS]
+        self.withdraw_ids = [ids.MOLTEN_GLASS, ids.GLASSBLOWING_PIPE]
         self.withdraw_paths = [self.WILLOWSDAD_IMAGES.joinpath("Molten_glass_bank.png")]
         self.deposit_ids = [ids.LANTERN_LENS]
         self.lanternlens = 0
@@ -181,7 +181,7 @@ class OSRSWDGlassblowing(WillowsDadBot):
             None
         """
         # get unique items in inventory
-        unique_items = self.api_m.get_first_occurrence(self.withdraw_ids, ids.GLASSBLOWING_PIPE)
+        unique_items = self.api_m.get_first_occurrence(self.withdraw_ids)
 
         # move mouse to each item and click
         for item in unique_items:
