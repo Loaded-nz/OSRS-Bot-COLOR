@@ -285,7 +285,7 @@ class OSRSAltar(OSRSBot):
                 else:
                     food = False
                     while not food: 
-                        food_img = imsearch.BOT_IMAGES.joinpath("altar_bot", "Lobster.png")
+                        food_img = imsearch.BOT_IMAGES.joinpath("altar_bot", "Shark.png")
                         food = imsearch.search_img_in_rect(food_img, self.win.game_view,confidence=0.3)       
                         self.debug("No food found in bank. trying again.")
 
