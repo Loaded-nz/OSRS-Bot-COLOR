@@ -10,8 +10,8 @@ Bow_recipes = {
     "Maple Long": ["Knife_bank.png","Maple_logs_bank.png","Maple_longbow_(u)_bank.png"],
     "Yew Short": ["Knife_bank.png","Yew_logs_bank.png","Yew_shortbow_(u).png"],
     "Yew Long": ["Knife_bank.png","Yew_logs_bank.png","Yew_longbow_(u).png"],
-    "Magic Short": ["Knife_bank.png","Magic_logs_bank.png","Magic_shortbow_(u)_bank.png"],
-    "Magic Long": ["Knife_bank.png","Magic_logs_bank.png","Magic_longbow_(u)_bank.png"]
+    "Magic Short": ["Knife_bank.png","Magic_logs_bank.png","Magic_shortbow_(u).png"],
+    "Magic Long": ["Knife_bank.png","Magic_logs_bank.png","Magic_longbow_(u).png"]
     
 }
 
