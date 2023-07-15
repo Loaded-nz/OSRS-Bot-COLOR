@@ -132,7 +132,7 @@ class OSRSWDGlassblowing(WillowsDadBot):
         afk_time = 0
         afk__start_time = time.time() 
 
-        while len(self.api_m.get_first_occurrence(ids.MOLTEN_GLASS)) != 0:
+        while len(self.api_m.get_inv_item_indices(ids.MOLTEN_GLASS)) != 0:
             time.sleep(self.random_sleep_length(.65, 2.2))
             afk_time = int(time.time() - afk__start_time)
             self.breaks_skipped = afk_time // 15
