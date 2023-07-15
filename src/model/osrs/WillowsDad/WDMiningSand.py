@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 
-class OSRSWDMining(WillowsDadBot):
+class OSRSWSand(WillowsDadBot):
     def __init__(self):
         bot_title = "WillowsDad Mining + Sand"
         description = """Mines at supported locations."""
