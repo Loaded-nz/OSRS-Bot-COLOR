@@ -252,11 +252,26 @@ class OSRSBowFletcher(OSRSBot, launcher.Launchable):
                 pag.keyDown('2')
                 time.sleep(sleep_time_key)
                 pag.keyUp('2')
+            elif make_all := imsearch.search_img_in_rect(make_all_img, self.win.chat):
+                print("make all not clicked not found")
+                self.mouse.move_to(make_all.random_point(),mouseSpeed=self.mouse_speed[0])
+                self.mouse.click()
+                time.sleep(Sleep_time)
+                pag.keyDown('2')
+                time.sleep(sleep_time_key)
+                pag.keyUp('2')
             else:
                 self.log_msg(f"Couldn't make all items")
                 self.stop()
         else:
             if make_all := imsearch.search_img_in_rect(make_all_clicked, self.win.chat):
+                time.sleep(Sleep_time)
+                pag.keyDown('3')
+                time.sleep(sleep_time_key)
+                pag.keyUp('3')
+            elif make_all := imsearch.search_img_in_rect(make_all_img, self.win.chat):
+                self.mouse.move_to(make_all.random_point(),mouseSpeed=self.mouse_speed[0])
+                self.mouse.click()
                 time.sleep(Sleep_time)
                 pag.keyDown('3')
                 time.sleep(sleep_time_key)
