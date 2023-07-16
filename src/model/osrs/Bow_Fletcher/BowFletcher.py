@@ -36,8 +36,8 @@ class OSRSBowFletcher(OSRSBot, launcher.Launchable):
         self.options_builder.add_slider_option("break_length_min", "How long to take breaks (min) (Seconds)?", 1, 300)
         self.options_builder.add_slider_option("break_length_max", "How long to take breaks (max) (Seconds)?", 2, 300)    
         self.options_builder.add_checkbox_option("mouse_speed", "Mouse Speed (must choose & only select one)",[ "slowest", "slow","medium","fast","fastest"])
-        self.options_builder.add_slider_option("time_between_actions_min", "How long to take between actions (min) (MiliSeconds)?", 600,3000)
-        self.options_builder.add_slider_option("time_between_actions_max", "How long to take between actions (max) (MiliSeconds)?", 600,3000)
+        self.options_builder.add_slider_option("time_between_actions_min", "How long to take between actions (min) (MiliSeconds)?", 300,3000)
+        self.options_builder.add_slider_option("time_between_actions_max", "How long to take between actions (max) (MiliSeconds)?", 300,3000)
         
                                                
     def save_options(self, options: dict):
@@ -252,26 +252,11 @@ class OSRSBowFletcher(OSRSBot, launcher.Launchable):
                 pag.keyDown('2')
                 time.sleep(sleep_time_key)
                 pag.keyUp('2')
-            elif make_all := imsearch.search_img_in_rect(make_all_img, self.win.chat):
-                print("make all not clicked not found")
-                self.mouse.move_to(make_all.random_point(),mouseSpeed=self.mouse_speed[0])
-                self.mouse.click()
-                time.sleep(Sleep_time)
-                pag.keyDown('2')
-                time.sleep(sleep_time_key)
-                pag.keyUp('2')
             else:
                 self.log_msg(f"Couldn't make all items")
                 self.stop()
         else:
             if make_all := imsearch.search_img_in_rect(make_all_clicked, self.win.chat):
-                time.sleep(Sleep_time)
-                pag.keyDown('3')
-                time.sleep(sleep_time_key)
-                pag.keyUp('3')
-            elif make_all := imsearch.search_img_in_rect(make_all_img, self.win.chat):
-                self.mouse.move_to(make_all.random_point(),mouseSpeed=self.mouse_speed[0])
-                self.mouse.click()
                 time.sleep(Sleep_time)
                 pag.keyDown('3')
                 time.sleep(sleep_time_key)
