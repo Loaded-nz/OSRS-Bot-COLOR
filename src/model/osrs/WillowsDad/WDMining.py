@@ -247,10 +247,11 @@ class OSRSWDMining(WillowsDadBot):
         if not self.is_focused:
             self.log_msg("Runelite is not focused...")
         while not self.api_m.get_is_inv_full(): 
-            if self.get_nearest_tag(clr.CYAN):
-                self.mouse.move_to(self.get_nearest_tag(clr.CYAN).random_point())
-                self.mouse.click()
-            time.sleep(self.random_sleep_length())
+            if self.get_special_energy() >= 100 and self.dragon_special:
+                self.activate_special()
+                self.log_msg("Dragon Pickaxe Special Activated")
+            self.idle_time = time.time()
+            afk_time = int(time.time() - afk__start_time)
             if Mining_spot := self.get_nearest_tag(clr.PINK):
                 self.mouse.move_to(Mining_spot.random_point())
                 while not self.mouse.click(check_red_click=True):
@@ -291,7 +292,7 @@ class OSRSWDMining(WillowsDadBot):
             time.sleep(self.random_sleep_length()/2)
             self.close_bank()
         else:
-            self.drop_all(skip_slots=[0])
+            self.drop_all(skip_slots=self.api_m.get_inv_item_indices(self.Mining_tools))
 
     def check_equipment(self):
         """
