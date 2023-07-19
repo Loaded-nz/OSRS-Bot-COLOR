@@ -252,9 +252,9 @@ class OSRSWDMining(WillowsDadBot):
                 self.log_msg("Dragon Pickaxe Special Activated")
             self.idle_time = time.time()
             if int(time.time() - self.idle_time) > 10:
-                    if self.get_nearest_tag(clr.CYAN):
-                        self.mouse.move_to(self.get_nearest_tag(clr.CYAN).random_point())
-                        self.mouse.click()
+                if self.get_nearest_tag(clr.CYAN):
+                    self.mouse.move_to(self.get_nearest_tag(clr.CYAN).random_point())
+                    self.mouse.click()
                     time.sleep(self.random_sleep_length())
                     afk_time = int(time.time() - afk__start_time)
                     if Mining_spot := self.get_nearest_tag(clr.PINK):
