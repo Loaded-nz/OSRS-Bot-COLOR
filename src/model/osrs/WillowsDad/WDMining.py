@@ -24,7 +24,7 @@ class OSRSWDMining(WillowsDadBot):
         self.running_time = 200
         self.take_breaks = True
         self.afk_train = True
-        self.delay_min = 0.15
+        self.delay_min = .15
         self.delay_max = .67
         self.ores = ids.ores
         self.power_Mining = False
