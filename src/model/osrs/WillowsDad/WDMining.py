@@ -254,11 +254,10 @@ class OSRSWDMining(WillowsDadBot):
             afk_time = int(time.time() - afk__start_time)
             if Mining_spot := self.get_nearest_tag(clr.PINK):
                 self.mouse.move_to(Mining_spot.random_point())
-                self.mouse.click(check_red_click=True)
-                while self.mouse.click(check_red_click=True):
+                while not self.mouse.click(check_red_click=True):
                     if Mining_spot := self.get_nearest_tag(clr.PINK):
                         self.mouse.move_to(Mining_spot.random_point())
-                self.api_m.wait_til_gained_xp("Mining", 2)
+                self.api_m.wait_til_gained_xp("Mining", 5)
 
             else:
                 if int(time.time() - self.idle_time) > 10:
