@@ -69,8 +69,7 @@ class OSRSBlastFurnace(OSRSBot):
                 self.time_between_actions_max = options[option]/1000
             elif option == "break_probabilty":
                 self.break_probabilty = options[option]/100
-                
-                
+                    
             else:
                 self.log_msg(f"Unknown option: {option}")
                 print("Developer: ensure that the option keys are correct, and that options are being unpacked correctly.")
@@ -145,8 +144,33 @@ class OSRSBlastFurnace(OSRSBot):
         
     def bot_loop_main(self):
         self.find_Bank()
+        self.deposit_all()
+        self.CheckActiveStamina()
         self.check_run_engery()
-        self.get_ore()
+        
+        self.get_adamantite()
+        self.fill_coalBag()
+        self.close_bank()
+        self.deposit_Ores()
+        self.wait_for_ores_Deposit()
+        self.empty_coalBag()
+        self.deposit_Ores()
+        self.wait_for_coal_Deposit()
+        self.find_Bank()
+        self.deposit_all2()
+        self.CheckActiveStamina()
+        self.check_run_engery()
+        
+        self.coal_run()
+        self.coal_run()
+        self.coal_run_no_bank()
+        
+        self.collectBars()
+        self.wait_for_bar_collecion()
+        
+        self.find_Bank()
+        self.deposit_all()
+        self.get_adamantite()
         self.fill_coalBag()
         self.close_bank()
         self.deposit_Ores()
@@ -156,8 +180,7 @@ class OSRSBlastFurnace(OSRSBot):
         self.wait_for_coal_Deposit()
         self.collectBars()
         self.wait_for_bar_collecion()
-        self.find_Bank()
-        self.deposit_all()
+        
         self.barsmade = self.barsmade + 54
         
         
@@ -308,8 +331,8 @@ class OSRSBlastFurnace(OSRSBot):
         
         
         
-    def get_ore(self):
-        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Iron_ore_bank.png")  
+    def get_adamantite(self):
+        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Runite_ore_bank.png")  
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
         counter = 0
 
@@ -501,7 +524,7 @@ class OSRSBlastFurnace(OSRSBot):
             self.stop()
     
     def wait_for_bar_collecion(self):
-        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "steel_bar_chat.png")  
+        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "adamant_bar_chat.png")  
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
         counter = 0
 
@@ -544,23 +567,29 @@ class OSRSBlastFurnace(OSRSBot):
 
     
     def check_run_engery(self):
-        Run_enabled_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "run_enabled.png")
-        Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
-        
-        if self.api_m.get_run_energy() == 10000:
-            run = imsearch.search_img_in_rect(Run_enabled_img, self.win.run_orb.scale(3,3))
-            if run is None:
-                self.mouse.move_to(self.win.run_orb.random_point())
+        if self.stamina_active == False:
+            Stamina_Potion_1_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Stamina_potion(1)_bank.png")
+            Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
+            Stamina_Potion_1 = imsearch.search_img_in_rect(Stamina_Potion_1_img, self.win.game_view)
+          
+            if Stamina_Potion_1:  
+                Stamina_Potion_1 = imsearch.search_img_in_rect(Stamina_Potion_1_img, self.win.game_view)  
+                self.mouse.move_to(Stamina_Potion_1.random_point(),mouseSpeed=self.mouse_speed[0])#change this line to click on item in inventory
                 self.mouse.click()
-                time.sleep(Sleep_time)
-            else:
-                self.get_ore()
+                time.sleep(1)
+                self.drink_stamina_pot()
+                self.deposit_all()
+            else: 
+                self.log_msg("out of Stamina Potions")
+                self.logout()
+                self.stop()
+            
     
     def drink_stamina_pot(self):
             Stamina_Potion_1_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Stamina_potion(1).png")
             drink_stamina_Potion_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "drink_stamina.png")
             Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
-            Stamina_Potion_1 = imsearch.search_img_in_rect(Stamina_Potion_1_img, self.win.inventory_slots[1])
+            Stamina_Potion_1 = imsearch.search_img_in_rect(Stamina_Potion_1_img, self.win.inventory_slots[2])
             
             if Stamina_Potion_1:  
 
