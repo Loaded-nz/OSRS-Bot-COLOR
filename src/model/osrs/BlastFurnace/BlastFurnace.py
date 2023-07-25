@@ -590,7 +590,7 @@ class OSRSBlastFurnace(OSRSBot):
             Stamina_Potion_1_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Stamina_potion(1).png")
             drink_stamina_Potion_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "drink_stamina.png")
             Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
-            Stamina_Potion_1 = imsearch.search_img_in_rect(Stamina_Potion_1_img, self.win.inventory_slots[2])
+            Stamina_Potion_1 = imsearch.search_img_in_rect(Stamina_Potion_1_img, self.win.inventory_slots[1])
             
             if Stamina_Potion_1:  
 
