@@ -53,7 +53,7 @@ class OSRSKarams(WillowsDadBot):
             if option == "style":
                 if options[option] == "Vessel":
                     self.style = "Karambwan"
-                    self.fishing_tools = [ids.KARAMBWAN_VESSEL]
+                    self.fishing_tools = [ids.KARAMBWAN_VESSEL, ids.OPEN_FISH_BARREL]
                     self.fishing_bait = [ids.RAW_KARAMBWANJI]
             elif option == "dragon_special":
                 self.dragon_special = options[option] != []
@@ -93,9 +93,12 @@ class OSRSKarams(WillowsDadBot):
                 # check if inventory is full
                 if self.api_m.get_is_inv_full():
                     if not self.power_fishing:
+                        self.click_medallion()
                         self.walk_to_color(clr.YELLOW, 1)
                         self.bank_or_drop(deposit_slots)
                         self.check_equipment()
+                        self.click_qpc()
+                        self.click_ring
                         self.walk_to_color(clr.PINK, -1)
                     else:
                         self.bank_or_drop(deposit_slots)
@@ -137,6 +140,58 @@ class OSRSKarams(WillowsDadBot):
         self.stop()
 
 
+    def click_qpc(self):
+        self.mouse.move_to(self.win.cp_tabs[4].random_point(), mouseSpeed = "fastest")
+        self.mouse.click()
+        self.invetory_open = False
+
+        qpc_img = [self.WILLOWSDAD_IMAGES.joinpath("Quest_point_cape.png")]
+
+        qpc_teleport = imsearch.search_img_in_rect(qpc_img, self.win.control_panel)
+        while not qpc_teleport:
+            qpc_teleport = imsearch.search_img_in_rect(qpc_img, self.win.control_panel)
+            time.sleep(self.random_sleep_length())
+        self.mouse.move_to(qpc_teleport.random_point(), mouseSpeed = "fastest")
+        self.mouse.click()
+
+
+    def click_medallion(self):
+        self.mouse.move_to(self.win.cp_tabs[4].random_point(), mouseSpeed = "fastest")
+        self.mouse.click()
+        self.invetory_open = False
+
+        medallion_img = [self.WILLOWSDAD_IMAGES.joinpath("Drakhan's_medallion.png")]
+
+        medallion_teleport = imsearch.search_img_in_rect(medallion_img, self.win.control_panel)
+        while not medallion_teleport:
+            medallion_teleport = imsearch.search_img_in_rect(medallion_img, self.win.control_panel)
+            time.sleep(self.random_sleep_length())
+        self.mouse.move_to(medallion_teleport.random_point(), mouseSpeed = "fastest")
+        self.mouse.click()   
+
+
+    def click_ring(self):
+        self.is_runelite_focused()   # check if runelite is focused
+        if not self.is_focused:
+            self.log_msg("Runelite is not focused...")
+        while True: 
+            self.idle_time = time.time()
+            if fairy_ring := self.get_nearest_tag(clr.CYAN):
+                self.mouse.move_to(fairy_ring.random_point())
+                while not self.mouse.click(check_red_click=True):
+                    if fairy_ring := self.get_nearest_tag(clr.CYAN):
+                        self.mouse.move_to(fairy_ring.random_point(), mouseSpeed = "fastest")
+                time.sleep(self.random_sleep_length())
+                break
+            else:
+                self.log_msg("No fairy ring found...")
+                self.walk_to_color(clr.CYAN, -1)
+                if int(time.time() - self.idle_time) > 32:
+                    self.adjust_camera(clr.CYAN, 1)
+                if int(time.time() - self.idle_time) > 60:
+                    self.log_msg("No fairy ring found in 60 seconds, quitting bot.")
+                    self.stop()
+    
     def walk_to_color(self, color: clr, direction: int):
         """
         Walks to the bank.
@@ -186,9 +241,6 @@ class OSRSKarams(WillowsDadBot):
         self.idle_time = 0
         self.deposit_ids = [ids.RAW_KARAMBWAN, ids.CLUE_BOTTLE_BEGINNER, ids.CLUE_BOTTLE_EASY, ids.CLUE_BOTTLE_MEDIUM, ids.CLUE_BOTTLE_HARD, ids.CLUE_BOTTLE_ELITE]
 
-        if not self.power_fishing:
-            self.face_north()
-        
         # Setup Checks for axes and tagged objects
         self.check_equipment()
         
