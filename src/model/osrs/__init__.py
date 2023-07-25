@@ -6,8 +6,7 @@ from .WillowsDad.WDMining import OSRSWDMining
 from .WillowsDad.WDMiningSand import OSRSWSand
 from .hunterbotscript import OSRSHunter
 from .cooking import OSRSCook
-from .pickpocketer import OSRSPickpocket
-from .nmz import OSRSNMZ
 from .Cannonballs import Smithing
 from .Bow_Fletcher.BowFletcher import OSRSBowFletcher
 from .altar import OSRSAltar
+from .BlastFurnace.BlastFurnace import OSRSBlastFurnace
