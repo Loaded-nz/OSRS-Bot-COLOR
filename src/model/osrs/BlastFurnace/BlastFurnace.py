@@ -145,7 +145,6 @@ class OSRSBlastFurnace(OSRSBot):
         
     def bot_loop_main(self):
         self.find_Bank()
-        self.deposit_all()
         self.CheckActiveStamina()
         self.check_run_engery()
         
