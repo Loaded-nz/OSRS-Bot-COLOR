@@ -545,13 +545,14 @@ class OSRSBlastFurnace(OSRSBot):
     
     def check_run_engery(self):
         Run_enabled_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "run_enabled.png")
-
+        Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
+        
         if self.api_m.get_run_energy() == 10000:
             run = imsearch.search_img_in_rect(Run_enabled_img, self.win.run_orb.scale(3,3))
             if run is None:
                 self.mouse.move_to(self.win.run_orb.random_point())
                 self.mouse.click()
-                time.sleep(self.random_sleep_length())
+                time.sleep(Sleep_time)
             else:
                 self.get_ore()
     
