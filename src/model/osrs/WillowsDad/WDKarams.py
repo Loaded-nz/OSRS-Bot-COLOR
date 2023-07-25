@@ -38,7 +38,7 @@ class OSRSKarams(WillowsDadBot):
         unpack the dictionary of options after the user has selected them.
         """
         super().create_options()
-        self.options_builder.add_dropdown_option("style", "What type of fishing?", ["Fly", "Bait", "Harpoon", "Net", "Cage"])
+        self.options_builder.add_dropdown_option("style", "What type of fishing?", ["Vessel"])
         self.options_builder.add_checkbox_option("power_fishing", "Power Fishing? Drops everything in inventory.", [" "])
         self.options_builder.add_checkbox_option("dragon_special", "Use Dragon Harpoon Special?", [" "])
 
@@ -53,7 +53,7 @@ class OSRSKarams(WillowsDadBot):
             if option == "style":
                 if options[option] == "Vessel":
                     self.style = "Karambwan"
-                    self.fishing_tools = [ids.KARAMBWAN_VESSEL, ids.OPEN_FISH_BARREL]
+                    self.fishing_tools = [ids.KARAMBWAN_VESSEL]
                     self.fishing_bait = [ids.RAW_KARAMBWANJI]
             elif option == "dragon_special":
                 self.dragon_special = options[option] != []
