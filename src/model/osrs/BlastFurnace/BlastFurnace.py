@@ -146,7 +146,6 @@ class OSRSBlastFurnace(OSRSBot):
     def bot_loop_main(self):
         self.find_Bank()
         self.check_run_engery()
-        
         self.get_ore()
         self.fill_coalBag()
         self.close_bank()
@@ -155,13 +154,10 @@ class OSRSBlastFurnace(OSRSBot):
         self.empty_coalBag()
         self.deposit_Ores()
         self.wait_for_coal_Deposit()
-        self.check_run_engery()
         self.collectBars()
         self.wait_for_bar_collecion()
-        
         self.find_Bank()
         self.deposit_all()
-        
         self.barsmade = self.barsmade + 54
         
         
@@ -556,7 +552,8 @@ class OSRSBlastFurnace(OSRSBot):
                 self.mouse.move_to(self.win.run_orb.random_point())
                 self.mouse.click()
                 time.sleep(self.random_sleep_length())
-            
+            else:
+                self.get_ore()
     
     def drink_stamina_pot(self):
             Stamina_Potion_1_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Stamina_potion(1).png")
