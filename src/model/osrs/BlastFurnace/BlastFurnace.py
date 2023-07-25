@@ -332,7 +332,7 @@ class OSRSBlastFurnace(OSRSBot):
         
         
     def get_adamantite(self):
-        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Runite_ore_bank.png")  
+        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Adamant_ore_bank.png")  
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
         counter = 0
 
