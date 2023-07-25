@@ -170,6 +170,13 @@ class OSRSKarams(WillowsDadBot):
         self.mouse.click()   
 
 
+    def Fish_barrel(self):
+        fish_barrel_img = [self.WILLOWSDAD_IMAGES.joinpath("Open_fish_barrel.png")]
+        
+        self.mouse.move_to(fish_barrel_img.random_point(), mouseSpeed = "fastest")
+        self.mouse.click()
+    
+    
     def click_ring(self):
         self.is_runelite_focused()   # check if runelite is focused
         if not self.is_focused:
@@ -191,6 +198,7 @@ class OSRSKarams(WillowsDadBot):
                 if int(time.time() - self.idle_time) > 60:
                     self.log_msg("No fairy ring found in 60 seconds, quitting bot.")
                     self.stop()
+    
     
     def walk_to_color(self, color: clr, direction: int):
         """
@@ -315,6 +323,7 @@ class OSRSKarams(WillowsDadBot):
             self.check_deposit_all()
             self.deposit_items(deposit_slots, self.deposit_ids)
             time.sleep(self.random_sleep_length())
+            self.Fish_barrel()
             self.close_bank()
             time.sleep(self.random_sleep_length())
         else:
