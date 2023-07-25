@@ -24,7 +24,7 @@ class OSRSKarams(WillowsDadBot):
         self.delay_max = .67
         self.style = "Cage"
         self.power_fishing = False
-        self.fishing_tools = [ids.KARAMBWAN_VESSEL]
+        self.fishing_tools = [ids.KARAMBWAN_VESSEL_3159]
         self.fishing_bait = [ids.RAW_KARAMBWANJI]
         self.dragon_special = False
 
@@ -53,7 +53,7 @@ class OSRSKarams(WillowsDadBot):
             if option == "style":
                 if options[option] == "Vessel":
                     self.style = "Karambwan"
-                    self.fishing_tools = [ids.KARAMBWAN_VESSEL]
+                    self.fishing_tools = [ids.KARAMBWAN_VESSEL_3159]
                     self.fishing_bait = [ids.RAW_KARAMBWANJI]
             elif option == "dragon_special":
                 self.dragon_special = options[option] != []
