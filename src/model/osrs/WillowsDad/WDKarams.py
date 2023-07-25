@@ -338,7 +338,7 @@ class OSRSKarams(WillowsDadBot):
         if not self.api_m.get_if_item_in_inv(self.fishing_tools) and not self.api_m.get_is_item_equipped(self.fishing_tools):
             self.log_msg("No fishing tool or in inventory, please fix that...")
             self.stop()
-        if self.style in ["Fly", "Bait"] and not self.api_m.get_if_item_in_inv(
+        if self.style in ["Vessel"] and not self.api_m.get_if_item_in_inv(
             self.fishing_bait
         ):
             self.log_msg("No fishing bait in inventory...")
