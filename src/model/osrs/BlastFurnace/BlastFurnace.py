@@ -551,11 +551,11 @@ class OSRSBlastFurnace(OSRSBot):
         Run_enabled_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "run_enabled.png")
 
         if self.api_m.get_run_energy() == 10000:
-                        run = imsearch.search_img_in_rect(Run_enabled_img, self.win.run_orb.scale(3,3))
-                        if run is None:
-                            self.mouse.move_to(self.win.run_orb.random_point())
-                            self.mouse.click()
-                            time.sleep(self.random_sleep_length())
+            run = imsearch.search_img_in_rect(Run_enabled_img, self.win.run_orb.scale(3,3))
+            if run is None:
+                self.mouse.move_to(self.win.run_orb.random_point())
+                self.mouse.click()
+                time.sleep(self.random_sleep_length())
             
     
     def drink_stamina_pot(self):
