@@ -165,8 +165,8 @@ class OSRSBowFletcher(OSRSBot, launcher.Launchable):
    
     def set_supplies_amount(self):
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max) 
-        withdrawl_all_img = imsearch.BOT_IMAGES.joinpath("Bow_Fletcher_bot", "withdrawl_all.png")
-        withdrawl_all_clicked_img = imsearch.BOT_IMAGES.joinpath("Bow_Fletcher_bot", "withdrawl_all_clicked.png")
+        withdrawl_all_img = imsearch.BOT_IMAGES.joinpath("Bow_Fletcher_bot", "withdrawl_x.png")
+        withdrawl_all_clicked_img = imsearch.BOT_IMAGES.joinpath("Bow_Fletcher_bot", "withdrawl_x_clicked.png")
         
         if withdrawl_all:= imsearch.search_img_in_rect(withdrawl_all_img, self.win.game_view):
             self.mouse.move_to(withdrawl_all.random_point(),mouseSpeed=self.mouse_speed[0])
@@ -321,7 +321,18 @@ class OSRSBowFletcher(OSRSBot, launcher.Launchable):
         else:
             self.log_msg(f"No recipe found for {Fletch_item}")
             self.stop()
-           
+
+        Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
+        Ingrediant_one_img = imsearch.BOT_IMAGES.joinpath("Bow_Fletcher_bot", ingredient2)  
+        
+        if Ingrediant_one := imsearch.search_img_in_rect(Ingrediant_two_img, self.win.game_view):
+            self.mouse.move_to(Ingrediant_one.random_point(),mouseSpeed=self.mouse_speed[0])
+            self.mouse.click()
+            time.sleep(Sleep_time)
+        else:
+            self.log_msg(f"Out of ingredients")
+            self.stop()
+
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
         Ingrediant_two_img = imsearch.BOT_IMAGES.joinpath("Bow_Fletcher_bot", ingredient2)  
         
