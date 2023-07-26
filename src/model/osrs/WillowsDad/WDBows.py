@@ -68,7 +68,7 @@ class OSRSBowMaker(WillowsDadBot):
 
             try:
                 # Inventory finished, deposit and withdraw
-                if len(self.api_m.get_inv_item_indices(ids.BOW_STRING)) == 0:
+                if len(self.api_m.get_inv_item_indices(ids.KNIFE)) == 0:
                     self.open_bank()
                     time.sleep(self.random_sleep_length()/2)
                     self.check_deposit_all()
