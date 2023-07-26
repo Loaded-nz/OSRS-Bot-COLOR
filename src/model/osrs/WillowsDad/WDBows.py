@@ -68,7 +68,7 @@ class OSRSBowMaker(WillowsDadBot):
 
             try:
                 # Inventory finished, deposit and withdraw
-                if len(self.api_m.get_inv_item_indices(ids.SUPERCOMPOST)) == 0:
+                if len(self.api_m.get_inv_item_indices(ids.BOW_STRING)) == 0:
                     self.open_bank()
                     time.sleep(self.random_sleep_length()/2)
                     self.check_deposit_all()
@@ -79,7 +79,7 @@ class OSRSBowMaker(WillowsDadBot):
                         self.log_msg("Out of supplies, stopping.")
                         self.stop()
                     self.close_bank()
-                self.make_compost()
+                self.make_bows()
                 if self.afk_train and self.is_runelite_focused():
                     time.sleep(self.random_sleep_length() * 2)
                     self.switch_window()
@@ -114,11 +114,9 @@ class OSRSBowMaker(WillowsDadBot):
             Returns:
                 None"""
         super().setup()
-        self.withdraw_ids = [ids.SUPERCOMPOST, ids.VOLCANIC_ASH]
-        self.withdraw_paths = [self.WILLOWSDAD_IMAGES.joinpath("Supercompost_bank.png"), self.WILLOWSDAD_IMAGES.joinpath("Volcanic_ash_bank.png")]
-        self.deposit_ids = [ids.ULTRACOMPOST]
-        self.supercompost = 0
-        self.text_box_ultracompost = self.WILLOWSDAD_IMAGES.joinpath("textboxultracompost.png")
+        self.withdraw_ids = [ids.BOW_STRING, ids.MAGIC_LONGBOW_U]
+        self.withdraw_paths = [self.WILLOWSDAD_IMAGES.joinpath("bow_string_bank.png"), self.WILLOWSDAD_IMAGES.joinpath("Magic_longbow_(u)_bank.png")]
+        self.deposit_ids = [ids.MAGIC_LONGBOW]
     
 
     def sleep(self, percentage):
@@ -131,7 +129,7 @@ class OSRSBowMaker(WillowsDadBot):
         afk_time = 0
         afk__start_time = time.time() 
 
-        while len(self.api_m.get_inv_item_indices(ids.SUPERCOMPOST)) != 0:
+        while len(self.api_m.get_inv_item_indices(ids.BOW_STRING)) != 0:
             time.sleep(self.random_sleep_length(.65, 2.2))
             afk_time = int(time.time() - afk__start_time)
             self.breaks_skipped = afk_time // 15
@@ -171,9 +169,9 @@ class OSRSBowMaker(WillowsDadBot):
         return rd.fancy_normal_sample(delay_min, delay_max)
     
 
-    def make_compost(self):
+    def make_bows(self):
         """
-        Makes compost by click on each item and hitting space
+        Makes bows by click on each item and hitting space
         Returns:
             void
         Args:
@@ -187,14 +185,3 @@ class OSRSBowMaker(WillowsDadBot):
             self.mouse.move_to(self.win.inventory_slots[item].random_point())
             self.mouse.click()
             time.sleep(self.random_sleep_length())
-
-        item_found = imsearch.search_img_in_rect(self.text_box_ultracompost, self.win.chat)
-        search_time = time.time()
-        while not item_found:
-            item_found = imsearch.search_img_in_rect(self.text_box_ultracompost, self.win.chat)
-            if time.time() - search_time > 2:
-                self.log_msg("Error finding ultracompost in chat box, stopping.")
-                self.stop()
-            time.sleep(.1)
-        time.sleep(self.random_sleep_length())
-        pag.press("space")
