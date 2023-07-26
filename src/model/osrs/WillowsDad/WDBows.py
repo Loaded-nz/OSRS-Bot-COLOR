@@ -72,7 +72,7 @@ class OSRSBowMaker(WillowsDadBot):
                     self.open_bank()
                     self.deposit_items(deposit_slots, self.deposit_ids)
                     self.sleep(self.random_sleep_length()/2)
-                    suplies_left = self.withdraw_items(self.withdraw_paths[1])
+                    suplies_left = self.withdraw_items(self.withdraw_paths[0,1])
                     if not suplies_left:
                         self.log_msg("Out of supplies, stopping.")
                         self.stop()
