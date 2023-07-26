@@ -325,7 +325,7 @@ class OSRSBowFletcher(OSRSBot, launcher.Launchable):
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
         Ingrediant_one_img = imsearch.BOT_IMAGES.joinpath("Bow_Fletcher_bot", ingredient2)  
         
-        if Ingrediant_one := imsearch.search_img_in_rect(Ingrediant_two_img, self.win.game_view):
+        if Ingrediant_one := imsearch.search_img_in_rect(Ingrediant_one_img, self.win.game_view):
             self.mouse.move_to(Ingrediant_one.random_point(),mouseSpeed=self.mouse_speed[0])
             self.mouse.click()
             time.sleep(Sleep_time)
