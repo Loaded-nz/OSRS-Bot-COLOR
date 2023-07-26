@@ -5,6 +5,7 @@ from .WillowsDad.WillowsDad_bot import WillowsDadBot
 from .WillowsDad.WDMining import OSRSWDMining
 from .WillowsDad.WDMiningSand import OSRSWSand
 from .WillowsDad.WDKarams import OSRSKarams
+from .WillowsDad.WDBows import  OSRSBowMaker
 from .hunterbotscript import OSRSHunter
 from .cooking import OSRSCook
 from .Cannonballs import Smithing
