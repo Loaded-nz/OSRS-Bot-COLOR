@@ -11,6 +11,10 @@ import pyautogui as pag
 import model.osrs.BlastFurnace.BotSpecImageSearch as imsearch
 import utilities.game_launcher as launcher
 import pathlib
+import utilities.T1G_API as T1G_API
+import utilities.ScreenToClient as stc
+import utilities.BackGroundScreenCap as bcp
+import utilities.RIOmouse as Mouse
 
 
 
@@ -50,6 +54,9 @@ class OSRSBlastFurnace(OSRSBot):
         self.options_builder.add_slider_option("time_between_actions_min", "How long to take between actions (min) (MiliSeconds)?", 600,3000)
         self.options_builder.add_slider_option("time_between_actions_max", "How long to take between actions (max) (MiliSeconds)?", 600,3000)
         
+        self.options_builder.add_process_selector("Client_Info")
+        self.options_builder.add_checkbox_option("Input","Choose Input Method",["Remote","PAG"])
+        
                                                
     def save_options(self, options: dict):
         for option in options:        
@@ -69,7 +76,27 @@ class OSRSBlastFurnace(OSRSBot):
                 self.time_between_actions_max = options[option]/1000
             elif option == "break_probabilty":
                 self.break_probabilty = options[option]/100
-                    
+                
+            elif option == "Client_Info":
+                self.Client_Info = options[option]
+                client_info = str(self.Client_Info)
+                win_name, pid_number = client_info.split(" : ")
+                self.win_name = win_name
+                self.pid_number = int(pid_number)
+                self.win.window_title = self.win_name
+                self.win.window_pid = self.pid_number
+                stc.window_title = self.win_name
+                Mouse.Mouse.clientpidSet = self.pid_number
+                bcp.window_title = self.win_name
+                bcp
+            elif option == "Input":
+                self.Input = options[option]
+                if self.Input == ['Remote']:
+                    Mouse.Mouse.RemoteInputEnabledSet = True
+                elif self.Input == ['PAG']:
+                    Mouse.Mouse.RemoteInputEnabledSet = False
+                
+                
             else:
                 self.log_msg(f"Unknown option: {option}")
                 print("Developer: ensure that the option keys are correct, and that options are being unpacked correctly.")
@@ -332,7 +359,7 @@ class OSRSBlastFurnace(OSRSBot):
         
         
     def get_adamantite(self):
-        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Adamantite_ore_bank.png")  
+        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Runite_ore_bank.png")  
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
         counter = 0
 
@@ -589,7 +616,7 @@ class OSRSBlastFurnace(OSRSBot):
             Stamina_Potion_1_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Stamina_potion(1).png")
             drink_stamina_Potion_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "drink_stamina.png")
             Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
-            Stamina_Potion_1 = imsearch.search_img_in_rect(Stamina_Potion_1_img, self.win.inventory_slots[1])
+            Stamina_Potion_1 = imsearch.search_img_in_rect(Stamina_Potion_1_img, self.win.inventory_slots[2])
             
             if Stamina_Potion_1:  
 
