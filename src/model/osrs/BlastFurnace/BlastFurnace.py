@@ -11,14 +11,8 @@ import pyautogui as pag
 import model.osrs.BlastFurnace.BotSpecImageSearch as imsearch
 import utilities.game_launcher as launcher
 import pathlib
-import utilities.T1G_API as T1G_API
-import utilities.ScreenToClient as stc
-import utilities.BackGroundScreenCap as bcp
-import utilities.RIOmouse as Mouse
 
 
-
-    
 class OSRSBlastFurnace(OSRSBot):
     api_m = MorgHTTPSocket()
     def __init__(self):
@@ -76,27 +70,7 @@ class OSRSBlastFurnace(OSRSBot):
                 self.time_between_actions_max = options[option]/1000
             elif option == "break_probabilty":
                 self.break_probabilty = options[option]/100
-                
-            elif option == "Client_Info":
-                self.Client_Info = options[option]
-                client_info = str(self.Client_Info)
-                win_name, pid_number = client_info.split(" : ")
-                self.win_name = win_name
-                self.pid_number = int(pid_number)
-                self.win.window_title = self.win_name
-                self.win.window_pid = self.pid_number
-                stc.window_title = self.win_name
-                Mouse.Mouse.clientpidSet = self.pid_number
-                bcp.window_title = self.win_name
-                bcp
-            elif option == "Input":
-                self.Input = options[option]
-                if self.Input == ['Remote']:
-                    Mouse.Mouse.RemoteInputEnabledSet = True
-                elif self.Input == ['PAG']:
-                    Mouse.Mouse.RemoteInputEnabledSet = False
-                
-                
+                   
             else:
                 self.log_msg(f"Unknown option: {option}")
                 print("Developer: ensure that the option keys are correct, and that options are being unpacked correctly.")
@@ -175,7 +149,7 @@ class OSRSBlastFurnace(OSRSBot):
         self.CheckActiveStamina()
         self.check_run_engery()
         
-        self.get_adamantite()
+        self.get_iron()
         self.fill_coalBag()
         self.close_bank()
         self.deposit_Ores()
@@ -188,7 +162,7 @@ class OSRSBlastFurnace(OSRSBot):
         self.CheckActiveStamina()
         self.check_run_engery()
         
-        self.coal_run()
+    '''self.coal_run()
         self.coal_run()
         self.coal_run_no_bank()
         
@@ -208,7 +182,7 @@ class OSRSBlastFurnace(OSRSBot):
         self.collectBars()
         self.wait_for_bar_collecion()
         
-        self.barsmade = self.barsmade + 54
+        self.barsmade = self.barsmade + 54'''
         
         
     def coal_run(self):
@@ -356,8 +330,26 @@ class OSRSBlastFurnace(OSRSBot):
             self.mouse.click()
             time.sleep(0.1)
         
-        
-        
+    def get_iron(self):
+        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Iron_ore_bank.png")  
+        Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
+        counter = 0
+
+        while True:
+            Desposit_all = imsearch.search_img_in_rect(Desposit_all_img, self.win.game_view)
+            if Desposit_all:  
+                break
+            time.sleep(0.1)
+            counter = counter + 1
+            if counter ==10:
+                self.find_Bank()
+            if counter == 20:
+                self.logout()
+                self.stop()
+        Desposit_all = imsearch.search_img_in_rect(Desposit_all_img, self.win.game_view)  
+        self.mouse.move_to(Desposit_all.random_point(),mouseSpeed=self.mouse_speed[0])#change this line to click on item in inventory
+        self.mouse.click()
+    
     def get_adamantite(self):
         Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Runite_ore_bank.png")  
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
