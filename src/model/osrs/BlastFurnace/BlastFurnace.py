@@ -326,25 +326,17 @@ class OSRSBlastFurnace(OSRSBot):
             time.sleep(0.1)
         
     def get_iron(self):
-        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Iron_ore_bank.png")  
-        Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
-        counter = 0
+        Iron_ore_bank = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Iron_ore_bank.png")  
+        try:
+            if Iron_ore := imsearch.search_img_in_rect(Iron_ore_bank, self.win.game_view):
+                self.mouse.move_to(Iron_ore.random_point())
+                self.mouse.click()
+                pag.press('escape')
+                time.sleep(rd.random.random() + self.delay)
+        except:
+            self.log_msg('No steel bars left, exiting')
+            self.stop()
 
-        while True:
-            Desposit_all = imsearch.search_img_in_rect(Desposit_all_img, self.win.game_view)
-            if Desposit_all:  
-                break
-            time.sleep(0.1)
-            counter = counter + 1
-            if counter ==10:
-                self.find_Bank()
-            if counter == 20:
-                self.logout()
-                self.stop()
-        Desposit_all = imsearch.search_img_in_rect(Desposit_all_img, self.win.game_view)  
-        self.mouse.move_to(Desposit_all.random_point(),mouseSpeed=self.mouse_speed[0])#change this line to click on item in inventory
-        self.mouse.click()
-    
     def get_adamantite(self):
         Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "Runite_ore_bank.png")  
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
