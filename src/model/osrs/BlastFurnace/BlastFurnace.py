@@ -543,7 +543,7 @@ class OSRSBlastFurnace(OSRSBot):
             self.stop()
     
     def wait_for_bar_collecion(self):
-        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "adamant_bar_chat.png")  
+        Desposit_all_img = imsearch.BOT_IMAGES.joinpath("BlastFurnace_IMG", "steel_bar_chat.png")  
         Sleep_time = rd.fancy_normal_sample(self.time_between_actions_min, self.time_between_actions_max)
         counter = 0
 
