@@ -144,7 +144,6 @@ class OSRSBlastFurnace(OSRSBot):
         self.deposit_all()
         self.CheckActiveStamina()
         self.check_run_engery()
-        
         self.get_iron()
         self.fill_coalBag()
         self.close_bank()
