@@ -47,11 +47,7 @@ class OSRSBlastFurnace(OSRSBot):
         self.options_builder.add_checkbox_option("mouse_speed", "Mouse Speed (must choose & only select one)",[ "slowest", "slow","medium","fast","fastest"])
         self.options_builder.add_slider_option("time_between_actions_min", "How long to take between actions (min) (MiliSeconds)?", 600,3000)
         self.options_builder.add_slider_option("time_between_actions_max", "How long to take between actions (max) (MiliSeconds)?", 600,3000)
-        
-        self.options_builder.add_process_selector("Client_Info")
-        self.options_builder.add_checkbox_option("Input","Choose Input Method",["Remote","PAG"])
-        
-                                               
+                                             
     def save_options(self, options: dict):
         for option in options:        
             if option == "running_time":
