@@ -27,7 +27,7 @@ class OSRSCook(OSRSBot):
 
     def create_options(self):
         self.options_builder.add_slider_option("running_time", "How long to run (minutes)?", 1, 500)
-        self.options_builder.add_dropdown_option("food_type", "Food type", ["Raw shrimps", "Raw anchovies", "Raw herring", "Raw trout", "Raw salmon", "Raw tuna", "Raw lobster", "Raw swordfish", "Raw monkfish", "Raw shark", "Raw manta ray", "Raw sea turtle"])
+        self.options_builder.add_dropdown_option("food_type", "Food type", ["Raw shrimps", "Raw anchovies", "Raw herring", "Raw trout", "Raw salmon", "Raw tuna", "Raw lobster", "Raw swordfish", "Raw monkfish", "Raw Karambwan", "Raw shark", "Raw manta ray", "Raw sea turtle"])
 
     def save_options(self, options: dict):
         for option in options:
@@ -140,6 +140,8 @@ def get_fish_id(fish_type):
         return ids.RAW_MONKFISH
     elif fish_type == "Raw shark":
         return ids.RAW_SHARK
+    elif fish_type == "Raw Karambwan:":
+        return ids.RAW_KARAMBWAN
     elif fish_type == "Raw manta ray":
         return ids.RAW_MANTA_RAY
     elif fish_type == "Raw sea turtle":
