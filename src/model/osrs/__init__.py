@@ -10,4 +10,4 @@ from .hunterbotscript import OSRSHunter
 from .cooking import OSRSCook
 from .Cannonballs import Smithing
 from .Bow_Fletcher.BowFletcher import OSRSBowFletcher
-from .nmz import OSRSNMZ
+from .bvfc import OSRSBVFC
