@@ -11,3 +11,4 @@ from .cooking import OSRSCook
 from .Cannonballs import Smithing
 from .Bow_Fletcher.BowFletcher import OSRSBowFletcher
 from .bvfc import OSRSBVFC
+from pickpocketer import OSRSPickpocket
